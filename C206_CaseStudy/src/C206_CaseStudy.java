@@ -33,7 +33,6 @@ public class C206_CaseStudy {
 		while (option != OPTION_QUIT) {
 			
 
-			
 			//change to SchoolCCARegistrationSystemMain.UserMenu(); to see what parent and students see
 			
 			//if(user == "user"){
