@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class C206_CaseStudy {
 
@@ -19,7 +20,6 @@ public class C206_CaseStudy {
 		CCAList.add(new CCA("Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
 		CCAList.add(new CCA("Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"));
 		CCAList.add(new CCA("Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"));
-
 		int option = 0;
 		String user;
 
@@ -44,7 +44,12 @@ public class C206_CaseStudy {
 
 			if (option == 1) {
 				// View all CCA
-			
+				System.out.println(String.format("%-25s %-25s %-25s %-25s %-25s %-25s", "Title", "Class Size", "Day", "Time", "Venue", "Instructor"));
+				for (int i = 0; i < CCAList.size(); i++) {
+					if (CCAList.get(i) != null) {
+					CCAList.get(i).displayCCA();
+				}
+			}
 				
 
 			} else if (option == 2) {

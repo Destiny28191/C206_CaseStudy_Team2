@@ -76,8 +76,10 @@ public class CCA {
 		this.instructor = instructor;
 	}
 	
-	
-	
-	
-	
+	public void displayCCA() {
+		String output = String.format("%-25s %-25d %-25s %-25s %-25s %-25s\n", title, classSize, day, time, venue, instructor);
+		output += String.format("%-25s\n", description);
+		System.out.println(output);
+	}
+
 }
