@@ -1,6 +1,7 @@
 
 public class CCA {
 	
+	private int ID;
 	private String title;
 	private String description;
 	private int classSize;
@@ -9,8 +10,9 @@ public class CCA {
 	private String venue;
 	private String instructor;
 	
-	public CCA(String title, String description, int classSize, String day, String time, String venue, String instructor) {
+	public CCA(int ID, String title, String description, int classSize, String day, String time, String venue, String instructor) {
 		super();
+		this.ID = ID;
 		this.title = title;
 		this.description = description;
 		this.classSize = classSize;
@@ -18,6 +20,14 @@ public class CCA {
 		this.time = time;
 		this.venue = venue;
 		this.instructor = instructor;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 
 	public String getTitle() {
@@ -77,8 +87,7 @@ public class CCA {
 	}
 	
 	public void displayCCA() {
-		String output = String.format("%-25s %-25d %-25s %-25s %-25s %-25s\n", title, classSize, day, time, venue, instructor);
-		output += String.format("%-25s\n", description);
+		String output = String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s\n", ID, title, instructor, classSize, day, time, venue, description);
 		System.out.println(output);
 	}
 

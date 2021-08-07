@@ -4,21 +4,20 @@ public class Student {
 	private String studentID;
 	private String studentPassword;
 	private String studentName;
-	private String studentGrade;
 	private String studentClass;
 	private String studentTeacher;
 	private String studentParentName;
 	private String StudentParentEmail;
 	private String studentContactNum;
 	
-	public Student(String studentID, String studentPassword, String studentName, String studentGrade,
+	public Student(String studentID, String studentPassword, String studentName,
 			String studentClass, String studentTeacher, String studentParentName, String studentParentEmail,
 			String studentContactNum) {
 		super();
 		this.studentID = studentID;
 		this.studentPassword = studentPassword;
 		this.studentName = studentName;
-		this.studentGrade = studentGrade;
+
 		this.studentClass = studentClass;
 		this.studentTeacher = studentTeacher;
 		this.studentParentName = studentParentName;
@@ -48,14 +47,6 @@ public class Student {
 
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
-	}
-
-	public String getStudentGrade() {
-		return studentGrade;
-	}
-
-	public void setStudentGrade(String studentGrade) {
-		this.studentGrade = studentGrade;
 	}
 
 	public String getStudentClass() {

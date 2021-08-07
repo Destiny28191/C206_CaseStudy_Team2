@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class C206_CaseStudy {
 
 	private static final int OPTION_QUIT = 5;
+	static boolean login = true;
+	static boolean checkvalidlogin = false;
 	public static void main(String[] args) {
 
 		ArrayList<Student> StudentList = new ArrayList<Student>();
@@ -11,17 +14,19 @@ public class C206_CaseStudy {
 		ArrayList<Staff> StaffList = new ArrayList<Staff>();
 		ArrayList<CCA> CCAList = new ArrayList<CCA>();
 
-		StudentList.add(new Student("123", "pass123", "John Doe", "Primary 6",
-				"6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
+		StudentList.add(new Student("123", "pass123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
 				"9876543"));
-		ParentList.add(new Parent("specialID123", "", ""));
+		ParentList.add(new Parent("specialID123", "123", "", ""));
 		StaffList.add(new Staff("staffID123", "pass123"));
-		CCAList.add(new CCA("Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
-		CCAList.add(new CCA("Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
-		CCAList.add(new CCA("Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"));
-		CCAList.add(new CCA("Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"));
+		CCAList.add(new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
+		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
+		CCAList.add(new CCA(2, "Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"));
+		CCAList.add(new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"));
 		int option = 0;
-		String user;
+		String userID;
+		String password;
+		String user = "Nobody yet";
+		
 
 		//NOTE
 		//Needs a login function because
@@ -30,26 +35,138 @@ public class C206_CaseStudy {
 		//It can either be put in else if (option == 2 && user == "Staff") {activate function meant for staff}
 		//Or it can be if else inside the options
 		
+		
+		
 		while (option != OPTION_QUIT) {
 			
+       	    
+    	    while (login) {
+    	    	
+    		
+    			C206_CaseStudy.LoginMenu();
+    			int Logintype = Helper.readInt("Enter an option > ");
+    			
+    			switch(Logintype) {
+    			
+    			//Student
+                case 1:
+                	userID = Helper.readString("Enter your ID: > ");
+               	    password = Helper.readString("Enter password > ");
+            		for (int i = 0; i < StudentList.size(); i++) {
+            			if (StudentList.get(i) != null) {
+            				if(StudentList.get(i).getStudentID().equals(userID) && StudentList.get(i).getStudentPassword().equals(password)) {
+            					user = "user";
+            					login = false;
+            					checkvalidlogin = true;
+            					System.out.println("Login successful");
+            				}else {
+            					checkvalidlogin = false;
+            					System.out.println("Incorrect username or password");
+            				}
+            		    }
+            	    }	
+                break;
+                
+                //Parent
+                case 2:      
+                	for (int i = 0; i < ParentList.size(); i++) {
+                		System.out.println(ParentList.get(i).getSpecialID());
+                		System.out.println(ParentList.get(i).getStudentID());
+                	}
+                	userID = Helper.readString("Enter your ID: > ");
+               	    password = Helper.readString("Enter password > ");
+            		for (int i = 0; i < ParentList.size(); i++) {
+            			if (ParentList.get(i) != null) {
+            				if(ParentList.get(i).getSpecialID().equals(userID) && ParentList.get(i).getStudentID().equals(password)) {
+            					user = "user";
+            					login = false;
+            					checkvalidlogin = true;
+            					System.out.println("Login successful");
+            				}else {
+            					checkvalidlogin = false;
+            					System.out.println("Incorrect username or password");
+            				}
+            		    }
+            	    }	
+                break; 
+                
+                //Staff
+                case 3:
+                	userID = Helper.readString("Enter your ID: > ");
+               	    password = Helper.readString("Enter password > ");
+            		for (int i = 0; i < StaffList.size(); i++) {
+            			if (StaffList.get(i) != null) {
+            				if(StaffList.get(i).getStaffID().equals(userID) && StaffList.get(i).getStaffPassword().equals(password)) {
+            					user = "staff";
+            					login = false;
+            					checkvalidlogin = true;
+            					System.out.println("Login successful");
+            				}else {
+            					checkvalidlogin = false;
+            					System.out.println("Incorrect username or password");
 
-			//change to SchoolCCARegistrationSystemMain.UserMenu(); to see what parent and students see
+            				}
+            		    }
+            	    }	
+                break;
+                
+                //Staff
+                case 4:
+                	Random r = new Random();
+                	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
+                    String pass = "";
+                    String studentid;
+                	String studentID = Helper.readString("Enter your child's student ID > ");
+                	String studentName = Helper.readString("Enter your child's full name > ");
+                	String studentclass = Helper.readString("Enter your child's class > ");
+                	String StudentTeacher = Helper.readString("Enter your child's teacher > ");
+                	String studentParent = Helper.readString("Enter your name > ");
+                	String studentParentEmail = Helper.readString("Enter your email address > ");
+                	String studentContactNum = Helper.readString("Enter your phone number > ");
+                	
+                	
+            		for (int i = 0; i < StaffList.size(); i++) {
+            			if (StudentList.get(i) != null) {
+            				if(StudentList.get(i).getStudentID().equals(studentID) && StudentList.get(i).getStudentName().equals(studentName) &&
+            				   StudentList.get(i).getStudentClass().equals(studentclass) && StudentList.get(i).getStudentTeacher().equals(StudentTeacher) &&
+            				   StudentList.get(i).getStudentParentName().equals(studentParent) && StudentList.get(i).getStudentParentEmail().equals(studentParentEmail) &&
+            				   StudentList.get(i).getStudentContactNum().equals(studentContactNum)
+            				   ) {
+            				    for (int k = 0; k < 7; k++) {
+            				        pass += alphabet.charAt(r.nextInt(alphabet.length()));
+            				    }
+            				    studentid = StudentList.get(i).getStudentID();
+            				    
+            					ParentList.add(new Parent(pass, studentid, "", ""));
+            					
+            					checkvalidlogin = false;
+            					System.out.println("Registration successful! Your registration ID is " + pass + " , Use this as your username and your child's student ID as the password");  
+            				}else {
+            					checkvalidlogin = false;
+            					System.out.println("Please enter the correct information");
+            				}
+            		    }
+            		}
+                break;
+    			}
+    	    }
+    	    
 			
-			//if(user == "user"){
-			//   SchoolCCARegistrationSystemMain.UserMenu();
-		    //}else{
+			//change to C206_CaseStudy.UserMenu(); to see what parent and students see
+			
+			if(user == "user")
+			{
+				C206_CaseStudy.UserMenu();
+		    }
+			else if(user == "staff"){
 			C206_CaseStudy.StaffMenu();
-			//}
+			}
+			
 			option = Helper.readInt("Enter an option > ");
 
 			if (option == 1) {
 				// View all CCA
-				System.out.println(String.format("%-25s %-25s %-25s %-25s %-25s %-25s", "Title", "Class Size", "Day", "Time", "Venue", "Instructor"));
-				for (int i = 0; i < CCAList.size(); i++) {
-					if (CCAList.get(i) != null) {
-					CCAList.get(i).displayCCA();
-				}
-			}
+				C206_CaseStudy.ViewCCA(CCAList);
 				
 
 			} else if (option == 2) {
@@ -73,10 +190,12 @@ public class C206_CaseStudy {
 			} else if (option == 4) {
 				// Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList
-				
-				//User - if(user == "user"){ 
-				//        option == 5 
-				//       }
+				if(user == "staff") {
+					C206_CaseStudy.DeleteCCA(CCAList);
+				}else if(user == "user"){ 
+				  option = OPTION_QUIT;
+				  System.out.println("Bye!");
+				}
 
 
 			} else if (option == OPTION_QUIT) {
@@ -85,9 +204,20 @@ public class C206_CaseStudy {
 			} else {
 				System.out.println("Invalid option");
 			}
-
+		  
 		}
-
+	 }
+	
+	
+	//This menu is only for CCA staff members to view
+	public static void LoginMenu() {
+		C206_CaseStudy.setHeader("Login as...");
+		System.out.println("1. Student");
+		System.out.println("2. Parent");
+		System.out.println("3. Staff");
+		System.out.println("4. Don't have an account? Sign up here");
+		System.out.println("5. Quit");
+		Helper.line(80, "-");
 	}
 
 	//This menu is only for CCA staff members to view
@@ -104,7 +234,7 @@ public class C206_CaseStudy {
 	
 	//This menu is only for the user to view
 	public static void UserMenu() {
-		C206_CaseStudy.setHeader("CCA - parent");
+		C206_CaseStudy.setHeader("CCA - user");
 		System.out.println("1. Display CCA");
 		System.out.println("2. Select CCA");
 		System.out.println("3. Remove existing CCA");
@@ -118,11 +248,35 @@ public class C206_CaseStudy {
 		System.out.println(header);
 		Helper.line(80, "-");
 	}
+
+	
 	
 	
 	//================================= Option 1 View all CCA =================================
+	public static void ViewCCA(ArrayList<CCA> CCAList) {
+		System.out.println(String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s", "ID", "Title", "Instructor", "Class Size", "Day", "Time", "Venue", "Description"));
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (CCAList.get(i) != null) {
+			CCAList.get(i).displayCCA();
+		}
+	  }	
+	}
+
+
 	
-
-
-
-}
+	//================================= Option 4 Delete CCA =================================
+	public static void DeleteCCA(ArrayList<CCA> CCAList) {
+		C206_CaseStudy.ViewCCA(CCAList);
+		int ID = Helper.readInt("Enter a CCA ID > ");
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (CCAList.get(i).getID() == ID) {
+			CCAList.remove(i);
+		}
+	  }	
+		
+		//Auto increment ID
+		for (int i = 0; i < CCAList.size(); i++) {
+			CCAList.get(i).setID(i);
+		}
+	  }	
+	}
