@@ -110,7 +110,7 @@ public class C206_CaseStudy {
             	    }	
                 break;
                 
-                //Staff
+                //Registration
                 case 4:
                 	Random r = new Random();
                 	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -159,7 +159,7 @@ public class C206_CaseStudy {
 				C206_CaseStudy.UserMenu();
 		    }
 			else if(user == "staff"){
-			C206_CaseStudy.StaffMenu();
+			    C206_CaseStudy.StaffMenu();
 			}
 			
 			option = Helper.readInt("Enter an option > ");
