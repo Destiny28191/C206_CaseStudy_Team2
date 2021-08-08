@@ -27,6 +27,17 @@ public class C206_CaseStudy {
 		String password;
 		String user = "Nobody yet";
 		
+		cca_category C1 = new cca_category("sports"); 
+	    cca_category C2 = new cca_category("Performing arts"); 
+	    cca_category C3 = new cca_category("Uniform group"); 
+	    cca_category C4 = new cca_category("clubs and society"); 
+	       
+	      ArrayList<cca_category> catList = new ArrayList<cca_category>(); 
+	      catList.add(C1); 
+	      catList.add(C2); 
+	      catList.add(C3); 
+	      catList.add(C4); 
+		
 
 		//NOTE
 		//Needs a login function because
@@ -173,11 +184,34 @@ public class C206_CaseStudy {
 				//Staff - Add a new item
 				//User - combine view all items and add a function to select a CCA and add it to parentList
 				
-				
-
 			} else if (option == 3) {
+				// View all CCA Categories
+				
+				
+			} else if (option == 4) {
+				//Staff - Add a CCA Category
+				//User - Remove existing CCA
+				if(user == "staff") {
+					C206_CaseStudy.AddCCACategory(catList);
+				}else if(user == "user"){ 
+				 //
+				}
+			
+			          
+			} else if (option == 5) {
+				//Staff - Delete a Category
+				//User - Exit
+				if(user == "staff") {
+					C206_CaseStudy.DeleteCCA(CCAList);
+				}else if(user == "user"){ 
+				  option = OPTION_QUIT;
+				  System.out.println("Bye!");
+				}
+				 
+
+			} else if (option == 6) {
 				// Update CCA
-				//After clicking 3, the system displays different things depending on who's logged in
+				//After clicking 6, the system displays different things depending on who's logged in
 				
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to update
 				//then it prompts the user to choose which detail they want to update, there's title, description, classSize, day, time, venue, instructor
@@ -187,7 +221,7 @@ public class C206_CaseStudy {
 				//Once an ID is entered, use the delete function to delete chosenCCA from parent arraylist
 
 
-			} else if (option == 4) {
+			} else if (option == 7) {
 				// Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList
 				if(user == "staff") {
@@ -209,7 +243,7 @@ public class C206_CaseStudy {
 	 }
 	
 	
-	//This menu is only for CCA staff members to view
+	//Login Menu
 	public static void LoginMenu() {
 		C206_CaseStudy.setHeader("Login as...");
 		System.out.println("1. Student");
@@ -225,9 +259,12 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("CCA - Staff");
 		System.out.println("1. Display CCA");
 		System.out.println("2. Add CCA");
-		System.out.println("3. Update CCA");
-		System.out.println("4. Delete CCA");
-		System.out.println("5. Quit");
+		System.out.println("3. Display CCA Categories");
+		System.out.println("4. Add CCA Category");
+		System.out.println("5. Delete CCA Category");
+		System.out.println("6. Update CCA");
+		System.out.println("7. Delete CCA");
+		System.out.println("8. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -237,8 +274,9 @@ public class C206_CaseStudy {
 		C206_CaseStudy.setHeader("CCA - user");
 		System.out.println("1. Display CCA");
 		System.out.println("2. Select CCA");
-		System.out.println("3. Remove existing CCA");
-		System.out.println("4. Quit");
+		System.out.println("3. Display CCA Categories");
+		System.out.println("4. Remove existing CCA");
+		System.out.println("5. Quit");
 		Helper.line(80, "-");
 
 	}
@@ -263,8 +301,55 @@ public class C206_CaseStudy {
 	}
 
 
+	//============================ Option 3 View all CCA Categories ===========================
+		public static void ViewCCACategories(ArrayList<cca_category> catList) {
+			for (int i = 0; i < catList.size(); i++) {
+		          if (catList.get(i) != null) {
+		          catList.get(i).displaycat();
+		        }
+		          }
+		}
+		
+	//============================== Option 4 Add CCA Category ==============================
+		public static void AddCCACategory(ArrayList<cca_category> catList) {
+			String CCAcategory = Helper.readString("Enter CCA Category: ");
+			
+			cca_category news = new cca_category(CCAcategory);
+		    boolean result =cca_category.add(catList,news);
+		    
+		    if (result == true) {
+		    	System.out.println("Category added!"); 
+		    } else { 
+				System.out.println("Category NOT added, you must include all details!");
+				}
+		    }
+				
+	//============================== Option 5 Delete CCA Category =============================
+		public static void DeleteCCACategory(ArrayList<cca_category> catList) {
+			int deletecat = Helper.readInt("Enter category to delete: "); 
+	         cca_category A=catList.get(deletecat);
+	        
+	            if ( A != null) { 
+	             System.out.println(A); 
+	             char toDelete = Helper.readChar("Do you wish to delete this CCA category?(y/n) > "); 
+	         
+	             if (toDelete == 'y') { 
+	              boolean deleted = catList.remove(A); 
+	         
+	              if (deleted == true) { 
+	               System.out.println(String.format("CCA category %s was deleted successfully.", 
+	                 deletecat)); 
+	              } else { 
+	               System.out.println("Something went wrong, CCA category was not deleted."); 
+	              } 
+	             } 
+	         
+	            } else { 
+	             System.out.println("That CCA category does not exist!"); 
+	            }		
+			}
 	
-	//================================= Option 4 Delete CCA =================================
+	//================================= Option 6 Delete CCA =================================
 	public static void DeleteCCA(ArrayList<CCA> CCAList) {
 		C206_CaseStudy.ViewCCA(CCAList);
 		int ID = Helper.readInt("Enter a CCA ID > ");
