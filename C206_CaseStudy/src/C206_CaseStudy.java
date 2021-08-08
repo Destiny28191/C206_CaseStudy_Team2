@@ -27,10 +27,10 @@ public class C206_CaseStudy {
 		String password;
 		String user = "Nobody yet";
 		
-		cca_category C1 = new cca_category("sports"); 
+		cca_category C1 = new cca_category("Sports"); 
 	    cca_category C2 = new cca_category("Performing arts"); 
 	    cca_category C3 = new cca_category("Uniform group"); 
-	    cca_category C4 = new cca_category("clubs and society"); 
+	    cca_category C4 = new cca_category("Clubs and Society"); 
 	       
 	      ArrayList<cca_category> catList = new ArrayList<cca_category>(); 
 	      catList.add(C1); 
@@ -121,7 +121,7 @@ public class C206_CaseStudy {
             	    }	
                 break;
                 
-                //Staff
+                //Parent
                 case 4:
                 	Random r = new Random();
                 	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -151,7 +151,7 @@ public class C206_CaseStudy {
             					ParentList.add(new Parent(pass, studentid, "", ""));
             					
             					checkvalidlogin = false;
-            					System.out.println("Registration successful! Your registration ID is " + pass + " , Use this as your username and your child's student ID as the password");  
+            					System.out.println("Registration successful! Your CCA registration ID is " + pass + " , Use this as your username and your child's student ID as the password");  
             				}else {
             					checkvalidlogin = false;
             					System.out.println("Please enter the correct information");
@@ -349,7 +349,7 @@ public class C206_CaseStudy {
 	            }		
 			}
 	
-	//================================= Option 6 Delete CCA =================================
+	//================================= Option 7 Delete CCA =================================
 	public static void DeleteCCA(ArrayList<CCA> CCAList) {
 		C206_CaseStudy.ViewCCA(CCAList);
 		int ID = Helper.readInt("Enter a CCA ID > ");
