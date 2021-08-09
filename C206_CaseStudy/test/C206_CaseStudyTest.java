@@ -67,7 +67,7 @@ public class C206_CaseStudyTest {
 	    assertEquals("Test if that Category arraylist size is 0?", 0, catList.size()); 
 	}
 	
-	 @Test 
+	@Test 
 	   public void testRetrieveAllcategory() { 
 	    // Test if Item list is not null but empty, so that can add a new item 
 	    assertNotNull("Test if there is valid Category arraylist to add to", catList); 
@@ -81,13 +81,11 @@ public class C206_CaseStudyTest {
 	    assertEquals("Test if that Category=arraylist size is 2?", 2, catList.size()); 
 	     
 	    //test if the expected output string same as the list of Academic Cluster retrieved 
-	    String input = "Sports";
-	    String input2 = "Performing arts";
-	      cca_category A=catList.get(0);
-	      cca_category B=catList.get(1);
+	    
+	   
 	        
-	    assertEquals("Check that ViewCCACategories", input, A);
-	    assertEquals("Check that ViewCCACategories", input2, B);
+	    assertSame("Check that ViewAllCategorylist", catList.get(0),C1);
+	    assertSame("Check that ViewAllCategorylist",  catList.get(1),C2);
 	}
 	 
 //======================================================================================
