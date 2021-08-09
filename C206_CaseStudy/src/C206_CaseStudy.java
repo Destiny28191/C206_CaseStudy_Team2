@@ -224,7 +224,7 @@ public class C206_CaseStudy {
 				
 			} else if (option == 3) {
 				// View all CCA Categories
-				
+				C206_CaseStudy.ViewCCACategories(catList);
 				
 			} else if (option == 4) {
 				//Staff - Add a CCA Category
@@ -240,7 +240,7 @@ public class C206_CaseStudy {
 				//Staff - Delete a Category
 				//User - Exit
 				if(user == "staff") {
-					C206_CaseStudy.DeleteCCA(CCAList);
+					C206_CaseStudy.DeleteCCACategory(catList);
 				}else if(user == "user"){ 
 				  option = OPTION_QUIT;
 				  System.out.println("Bye!");
@@ -372,7 +372,7 @@ public class C206_CaseStudy {
 	  }	
 	}
 	
-	//================================= Option 2 Add a CCA =================================
+	//=============================== Option 2 Add a CCA (STAFF) ===============================
 	public static boolean AddCCA(ArrayList<CCA> CCAList, CCA cca ) {
 		for (int i = 0; i < CCAList.size(); i++) {
 			if (cca.getID() < 0 || cca.getID() == CCAList.get(i).getID()) {
@@ -394,14 +394,15 @@ public class C206_CaseStudy {
 
 	//============================ Option 3 View all CCA Categories ===========================
 		public static void ViewCCACategories(ArrayList<cca_category> catList) {
+			System.out.println("CCA Categories");
 			for (int i = 0; i < catList.size(); i++) {
 		          if (catList.get(i) != null) {
 		          catList.get(i).displaycat();
 		        }
 		          }
-		}
+			}
 		
-	//============================== Option 4 Add CCA Category ==============================
+	//=========================== Option 4 Add CCA Category (STAFF) ===========================
 		public static void AddCCACategory(ArrayList<cca_category> catList) {
 			String CCAcategory = Helper.readString("Enter CCA Category > ");
 			
@@ -415,8 +416,9 @@ public class C206_CaseStudy {
 				}
 		    }
 				
-	//============================== Option 5 Delete CCA Category =============================
+	//=========================== Option 5 Delete CCA Category (STAFF)==========================
 		public static void DeleteCCACategory(ArrayList<cca_category> catList) {
+			C206_CaseStudy.ViewCCACategories(catList);
 			int deletecat = Helper.readInt("Enter category to delete > "); 
 	         cca_category A=catList.get(deletecat);
 	        
@@ -514,7 +516,8 @@ public class C206_CaseStudy {
 			if (CCAList.get(i).getID() == ID) {
 			CCAList.remove(i);
 		}
-	  }	
+	  }
+		System.out.println("CCA removed!");
 		
 		//Auto increment ID
 		for (int i = 0; i < CCAList.size(); i++) {
