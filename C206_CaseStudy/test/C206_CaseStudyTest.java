@@ -12,7 +12,13 @@ public class C206_CaseStudyTest {
     cca_category C3 = new cca_category("Uniform group"); 
     cca_category C4 = new cca_category("Clubs and Society"); 
        
-      ArrayList<cca_category> catList = new ArrayList<cca_category>(); 
+     ArrayList<cca_category> catList = new ArrayList<cca_category>(); 
+      
+     CCA cca1 = new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"); 
+     CCA cca2 = new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"); 
+     CCA cca3 = new CCA(2, "Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"); 
+     CCA cca4 = new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"); 
+     ArrayList<CCA> CCAList = new ArrayList<CCA>();   
 
 	@Before
 	public void setUp() throws Exception {
@@ -89,5 +95,30 @@ public class C206_CaseStudyTest {
 	}
 	 
 //======================================================================================
-
+	
+	
+//============================== add CCA ==============================
+//	@Test pls fix this ty
+//	  public void testRetrieveAllCCA() {
+//		 // Test if Item list is not null but empty, so that can add a new item  
+//	     assertNotNull("Test if there is valid CCA arraylist to add to", CCAList); 
+//	      
+//	       
+//	     //test if the list of Academic Clusters retrieved is empty  
+//	     assertEquals("Test if that CCA arraylist size is 0?", 0, CCAList.size());  
+//	         
+//	     //Given an empty list, after adding 2 items, test if the size of the list is 2  
+//	       CCA.add(CCAList, cca1);  
+//	       CCA.add(CCAList, cca2);  
+//	       CCA.add(CCAList, cca3);  
+//	       CCA.add(CCAList, cca4);  
+//	     assertEquals("Test if that CCA arraylist size is 4?", 4, CCAList.size());  
+//	       
+//	     //test if the expected output string same as the list of Academic Cluster retrieved  
+//	            
+//	     assertSame("Check that ViewAllCCAlist", CCAList.get(0),cca1); 
+//	     assertSame("Check that ViewAllCCAlist",  CCAList.get(1),cca2); 
+//	     assertSame("Check that ViewAllCCAlist", CCAList.get(2),cca3); 
+//	     assertSame("Check that ViewAllCCAlist",  CCAList.get(3),cca4); 
+//	}
 }
