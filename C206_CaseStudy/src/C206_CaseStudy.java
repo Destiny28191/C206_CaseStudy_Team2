@@ -62,7 +62,7 @@ public class C206_CaseStudy {
     			
     			//Student
                 case 1:
-                	userID = Helper.readString("Enter your ID: > ");
+                	userID = Helper.readString("Enter your ID > ");
                	    password = Helper.readString("Enter password > ");
             		for (int i = 0; i < StudentList.size(); i++) {
             			if (StudentList.get(i) != null) {
@@ -85,7 +85,7 @@ public class C206_CaseStudy {
                 		System.out.println(ParentList.get(i).getSpecialID());
                 		System.out.println(ParentList.get(i).getStudentID());
                 	}
-                	userID = Helper.readString("Enter your ID: > ");
+                	userID = Helper.readString("Enter your ID > ");
                	    password = Helper.readString("Enter password > ");
             		for (int i = 0; i < ParentList.size(); i++) {
             			if (ParentList.get(i) != null) {
@@ -104,7 +104,7 @@ public class C206_CaseStudy {
                 
                 //Staff
                 case 3:
-                	userID = Helper.readString("Enter your ID: > ");
+                	userID = Helper.readString("Enter your ID > ");
                	    password = Helper.readString("Enter password > ");
             		for (int i = 0; i < StaffList.size(); i++) {
             			if (StaffList.get(i) != null) {
@@ -182,9 +182,27 @@ public class C206_CaseStudy {
 				
 
 			} else if (option == 2) {
-				//Staff - Add a new item
+				//Staff - Add a new CCA
 				//User - combine view all items and add a function to select a CCA and add it to parentList
 				if (user == "staff") {
+					int cID = Helper.readInt("Enter CCA ID > ");
+					String cTitle = Helper.readString("Enter CCA name > ");
+					String cDes = Helper.readString("Enter CCA description > ");
+					int cSize = Helper.readInt("Enter CCA size: ");
+					String cDay = Helper.readString("Enter CCA date(s) > ");
+					String cTime = Helper.readString("Enter CCA timing > ");
+					String cVenue = Helper.readString("Enter CCA venue > ");
+					String cInstructor = Helper.readString("Enter CCA Instructor > ");
+					
+					CCA newCCA = new CCA(cID, cTitle, cDes, cSize, cDay, cTime, cVenue, cInstructor);
+					
+					boolean result = C206_CaseStudy.AddCCA(CCAList, newCCA);
+					
+					if (result == true) {
+						System.out.println("CCA added!");
+					} else {
+						System.out.println("CCA NOT added, you must include all details!");
+					}
 					 
 			    } else if (user == "user") { 
 			     C206_CaseStudy.ViewCCA(CCAList); 
@@ -240,7 +258,22 @@ public class C206_CaseStudy {
 				//User - Show list of all selected CCAs then prompts the user to choose the ID of the CCA they want to remove
 				//Once an ID is entered, use the delete function to delete chosenCCA from parent arraylist
 				if(user == "staff") {
-					C206_CaseStudy.updateCCADetails(CCAList);
+					 C206_CaseStudy.ViewCCA(CCAList); 
+				     int ID = Helper.readInt("Enter a CCA ID to enter CCA> "); 
+				     for (int i = 0; i < CCAList.size(); i++) { 
+				      if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
+				       System.out.println("Student added into CCA"); 
+				       // StudentInCCAList.add(user); 
+				       CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
+				       break; 
+				      } else { 
+				       System.out.println("Failed to add Student into CCA as it is full"); 
+				       C206_CaseStudy.StaffMenu(); 
+				       option = Helper.readInt("Enter option > "); 
+				       break; 
+				      } 
+				     } 
+				    
 				}else if(user == "user"){ 
 				 //
 				}
@@ -338,6 +371,25 @@ public class C206_CaseStudy {
 		}
 	  }	
 	}
+	
+	//================================= Option 2 Add a CCA =================================
+	public static boolean AddCCA(ArrayList<CCA> CCAList, CCA cca ) {
+		for (int i = 0; i < CCAList.size(); i++) {
+			if (cca.getID() < 0 || cca.getID() == CCAList.get(i).getID()) {
+				System.out.println("CCA ID already taken!");
+				return false;
+			}
+			
+			else if (cca.getTitle().equals(null) || cca.getDescription().equals(null) 
+				|| cca.getClassSize() < 1 || cca.getDay().equals(null) || cca.getTime().equals(null) 
+				|| cca.getVenue().equals(null) || cca.getInstructor().equals(null)) {
+					return false;
+				}
+			}
+		
+		CCAList.add(cca);
+		return true;
+	}
 
 
 	//============================ Option 3 View all CCA Categories ===========================
@@ -351,10 +403,10 @@ public class C206_CaseStudy {
 		
 	//============================== Option 4 Add CCA Category ==============================
 		public static void AddCCACategory(ArrayList<cca_category> catList) {
-			String CCAcategory = Helper.readString("Enter CCA Category: ");
+			String CCAcategory = Helper.readString("Enter CCA Category > ");
 			
 			cca_category news = new cca_category(CCAcategory);
-		    boolean result =cca_category.add(catList,news);
+		    boolean result = cca_category.add(catList,news);
 		    
 		    if (result == true) {
 		    	System.out.println("Category added!"); 
@@ -365,7 +417,7 @@ public class C206_CaseStudy {
 				
 	//============================== Option 5 Delete CCA Category =============================
 		public static void DeleteCCACategory(ArrayList<cca_category> catList) {
-			int deletecat = Helper.readInt("Enter category to delete: "); 
+			int deletecat = Helper.readInt("Enter category to delete > "); 
 	         cca_category A=catList.get(deletecat);
 	        
 	            if ( A != null) { 
