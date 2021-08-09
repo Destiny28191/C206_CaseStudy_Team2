@@ -10,14 +10,18 @@ public class C206_CaseStudy {
 	private static final int OPTION_UPDATE = 8;
 	public static void main(String[] args) {
 
-		ArrayList<Student> StudentList = new ArrayList<Student>();
+		ArrayList<Database> DatabaseList = new ArrayList<Database>();
 		ArrayList<Parent> ParentList = new ArrayList<Parent>();
 		ArrayList<Staff> StaffList = new ArrayList<Staff>();
+		ArrayList<Register> RegisterList = new ArrayList<Register>();
 		ArrayList<CCA> CCAList = new ArrayList<CCA>();
-
-		StudentList.add(new Student("123", "pass123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
-				"9876543"));
-		ParentList.add(new Parent("specialID123", "123", "", ""));
+		
+        DatabaseList.add(new Database ("420", "Dominic"));
+        DatabaseList.add(new Database ("69", "Stephen"));
+        DatabaseList.add(new Database ("123", "John Doe"));
+		RegisterList.add(new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
+				"98765432"));
+		ParentList.add(new Parent("abcdef", "", ""));
 		StaffList.add(new Staff("staffID123", "pass123"));
 		CCAList.add(new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
 		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
@@ -25,7 +29,6 @@ public class C206_CaseStudy {
 		CCAList.add(new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"));
 		int option = 0;
 		String userID;
-		String password;
 		String user = "Nobody yet";
 		
 		cca_category C1 = new cca_category("Sports"); 
@@ -63,17 +66,17 @@ public class C206_CaseStudy {
     			//Student
                 case 1:
                 	userID = Helper.readString("Enter your ID > ");
-               	    password = Helper.readString("Enter password > ");
-            		for (int i = 0; i < StudentList.size(); i++) {
-            			if (StudentList.get(i) != null) {
-            				if(StudentList.get(i).getStudentID().equals(userID) && StudentList.get(i).getStudentPassword().equals(password)) {
+               	    String name = Helper.readString("Enter your name > ");
+            		for (int i = 0; i < RegisterList.size(); i++) {
+            			if (DatabaseList.get(i) != null) {
+            				if(DatabaseList.get(i).getStudentID().equals(userID) && DatabaseList.get(i).getStudentName().equals(name)) {
             					user = "user";
             					login = false;
             					checkvalidlogin = true;
-            					System.out.println("Login successful");
+            					System.out.println("Login successful!");
             				}else {
             					checkvalidlogin = false;
-            					System.out.println("Incorrect username or password");
+            					System.out.println("Incorrect ID or name :(");
             				}
             		    }
             	    }	
@@ -81,22 +84,19 @@ public class C206_CaseStudy {
                 
                 //Parent
                 case 2:      
-                	for (int i = 0; i < ParentList.size(); i++) {
-                		System.out.println(ParentList.get(i).getSpecialID());
-                		System.out.println(ParentList.get(i).getStudentID());
-                	}
-                	userID = Helper.readString("Enter your ID > ");
-               	    password = Helper.readString("Enter password > ");
+                	String ccaRID = Helper.readString("Enter CCA Registration ID > ");
+               	    userID = Helper.readString("Enter student ID > ");
+               	    String phoneNum = Helper.readString("Enter your phone number > ");
             		for (int i = 0; i < ParentList.size(); i++) {
             			if (ParentList.get(i) != null) {
-            				if(ParentList.get(i).getSpecialID().equals(userID) && ParentList.get(i).getStudentID().equals(password)) {
+            				if(ParentList.get(i).getSpecialID().equals(ccaRID) && DatabaseList.get(i).getStudentID().equals(userID) && RegisterList.get(i).getsParentContactNum().equals(phoneNum)) {
             					user = "user";
             					login = false;
             					checkvalidlogin = true;
-            					System.out.println("Login successful");
+            					System.out.println("Login successful!");
             				}else {
             					checkvalidlogin = false;
-            					System.out.println("Incorrect username or password");
+            					System.out.println("Incorrect CCA Registration ID or student ID :(");
             				}
             		    }
             	    }	
@@ -105,17 +105,17 @@ public class C206_CaseStudy {
                 //Staff
                 case 3:
                 	userID = Helper.readString("Enter your ID > ");
-               	    password = Helper.readString("Enter password > ");
+               	    String password = Helper.readString("Enter password > ");
             		for (int i = 0; i < StaffList.size(); i++) {
             			if (StaffList.get(i) != null) {
             				if(StaffList.get(i).getStaffID().equals(userID) && StaffList.get(i).getStaffPassword().equals(password)) {
             					user = "staff";
             					login = false;
             					checkvalidlogin = true;
-            					System.out.println("Login successful");
+            					System.out.println("Login successful!");
             				}else {
             					checkvalidlogin = false;
-            					System.out.println("Incorrect username or password");
+            					System.out.println("Incorrect username or password :(");
 
             				}
             		    }
@@ -127,47 +127,48 @@ public class C206_CaseStudy {
                 	Random r = new Random();
                 	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
                     String pass = "";
-                    String studentid;
-                	String studentID = Helper.readString("Enter your child's student ID > ");
-                	String studentName = Helper.readString("Enter your child's full name > ");
-                	String studentclass = Helper.readString("Enter your child's class > ");
-                	String StudentTeacher = Helper.readString("Enter your child's teacher > ");
-                	String studentParent = Helper.readString("Enter your name > ");
-                	String studentParentEmail = Helper.readString("Enter your email address > ");
-                	String studentContactNum = Helper.readString("Enter your phone number > ");
+                	String sID = Helper.readString("Enter your child's student ID > ");
+                	String sName = Helper.readString("Enter your child's full name > ");
+                	String sClass = Helper.readString("Enter your child's class > ");
+                	String sTeacher = Helper.readString("Enter your child's teacher > ");
+                	String sParent = Helper.readString("Enter your name > ");
+                	String sParentEmail = Helper.readString("Enter your email address > ");
+                	String sParentContactNum = Helper.readString("Enter your phone number > ");
                 	
                 	
             		for (int i = 0; i < StaffList.size(); i++) {
-            			if (StudentList.get(i) != null) {
-            				if(StudentList.get(i).getStudentID().equals(studentID) && StudentList.get(i).getStudentName().equals(studentName) &&
-            				   StudentList.get(i).getStudentClass().equals(studentclass) && StudentList.get(i).getStudentTeacher().equals(StudentTeacher) &&
-            				   StudentList.get(i).getStudentParentName().equals(studentParent) && StudentList.get(i).getStudentParentEmail().equals(studentParentEmail) &&
-            				   StudentList.get(i).getStudentContactNum().equals(studentContactNum)
-            				   ) {
+            			if (RegisterList.get(i) != null) {
+            				if(RegisterList.get(i).getsID().equals(sID) && RegisterList.get(i).getsName().equals(sName)) {
             				    for (int k = 0; k < 7; k++) {
             				        pass += alphabet.charAt(r.nextInt(alphabet.length()));
             				    }
-            				    studentid = StudentList.get(i).getStudentID();
             				    
-            					ParentList.add(new Parent(pass, studentid, "", ""));
+            				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
+            				    ParentList.add(new Parent(pass, "", ""));
             					
             					checkvalidlogin = false;
-            					System.out.println("Registration successful! Your CCA registration ID is " + pass + " , Use this as your username and your child's student ID as the password");  
+            					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
             				}else {
             					checkvalidlogin = false;
-            					System.out.println("Please enter the correct information");
+            					System.out.println("Please enter the correct information!");
             				}
             		    }
             		}
                 break;
+                
+              //Exit
+                case 5:
+                  option = OPTION_QUIT;
+  				  System.out.println("Bye!");
+  				  break;
     			}
     	    }
+    	    
     	    
 			
 			//change to C206_CaseStudy.UserMenu(); to see what parent and students see
 			
-			if(user == "user")
-			{
+			if(user == "user"){
 				C206_CaseStudy.UserMenu();
 		    }
 			else if(user == "staff"){
