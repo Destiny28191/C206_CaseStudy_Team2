@@ -272,7 +272,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 8) {
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
-				//After they enter it, use the delete function to delete CCA from CCAList
+				//After they enter it, use the delete function to delete CCA from CCAList.
 				//User - Exit
 				if (user == "staff") {
 					C206_CaseStudy.DeleteCCA(CCAList);
@@ -734,7 +734,7 @@ public class C206_CaseStudy {
                 }    
                 
             }
-		//test
+		
 	//=========================== Add student to CCA ==========================
 		public static void AddStudentcca(ArrayList<studentcca> sclist) {
 	        String Scca = Helper.readString("Enter cca");

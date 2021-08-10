@@ -14,7 +14,7 @@ public class studentcca {
     public void setstudent(String student) {
       this.student = student;
     }
-    public static boolean add(ArrayList<studentcca>  sclist, studentcca A) {
+    public static boolean add(ArrayList<studentcca> sclist, studentcca A) {
         sclist.add(A);
         return true;
         

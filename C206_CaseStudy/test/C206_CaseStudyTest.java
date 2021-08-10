@@ -264,7 +264,7 @@ public class C206_CaseStudyTest {
 	// Test if Item list is not null but empty, so that can add a new item
 	assertNotNull("Test if there is valid Parent arraylist to add to", ParentList);
 
-	// test if the list of Academic Clusters retrieved is empty
+	// test if the list of Academic Clusters retrieved is empty.
 	assertEquals("Test if that Parent arraylist size is 0?", 0, ParentList.size());
 
 	// Given an empty list, after adding 2 items, test if the size of the list is 2
