@@ -734,7 +734,7 @@ public class C206_CaseStudy {
                 }    
                 
             }
-		
+		//test
 	//=========================== Add student to CCA ==========================
 		public static void AddStudentcca(ArrayList<studentcca> sclist) {
 	        String Scca = Helper.readString("Enter cca");
