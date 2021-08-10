@@ -14,9 +14,12 @@ public class C206_CaseStudy {
 		ArrayList<CCA> CCAList = new ArrayList<CCA>();
 
         DatabaseList.add(new Database ("123", "John Doe"));
+        DatabaseList.add(new Database ("456", "Mary Tay"));
+        DatabaseList.add(new Database ("789", "Bryan Lim"));
+        DatabaseList.add(new Database ("101", "Sally Tan"));
 		RegisterList.add(new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
 				"98765432"));
-		ParentList.add(new Parent("abcdef", "98765432",  "", ""));
+		ParentList.add(new Parent("abcdef", "98765432","123",  "", ""));
 		StaffList.add(new Staff("staffID123", "pass123"));
 		CCAList.add(new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
 		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
@@ -69,13 +72,12 @@ public class C206_CaseStudy {
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
             					break;
-            				}else {
-            					checkvalidlogin = false;
-            					System.out.println("Incorrect ID or name :(");
-            					break;
             				}
             		    }
             	    }	
+            		if(checkvalidlogin = false) {
+            			System.out.println("Incorrect ID or name :(");
+            		}
                 break;
                 
                 //Parent
@@ -84,19 +86,18 @@ public class C206_CaseStudy {
                	    userID = Helper.readString("Enter student ID > ");
             		for (int i = 0; i < ParentList.size(); i++) {
             			if (ParentList.get(i) != null) {
-            				if(ParentList.get(i).getSpecialID().equals(ccaRID) && DatabaseList.get(i).getStudentID().equals(userID)) {
+            				if(ParentList.get(i).getSpecialID().equals(ccaRID) && ParentList.get(i).getStudentID().equals(userID)) {
             					user = "user";
             					login = false;
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
             					break;
-            				}else {
-            					checkvalidlogin = false;
-            					System.out.println("Incorrect CCA Registration ID or student ID :(");
-            					break;
             				}
             		    }
             	    }	
+            		if(checkvalidlogin = false) {
+            			System.out.println("Incorrect CCA Registration ID or student ID :(");
+            		}
                 break; 
                 
                 //Staff
@@ -111,14 +112,12 @@ public class C206_CaseStudy {
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
             					break;
-            				}else {
-            					checkvalidlogin = false;
-            					System.out.println("Incorrect username or password :(");
-            					break;
-
             				}
             		    }
             	    }	
+            		if(checkvalidlogin = false) {
+            			System.out.println("Incorrect username or password :(");
+            		}
                 break;
                 
                 //Register
@@ -493,6 +492,7 @@ public class C206_CaseStudy {
 	//================================= Option 8 Register parents =================================
 	public static void RegisterParents(ArrayList<Database> DatabaseList, ArrayList<Parent> ParentList, ArrayList<Register> RegisterList) {
     	Random r = new Random();
+    	boolean successfulRegister = false;
     	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
         String pass = "";
     	String sID = Helper.readString("Enter your child's student ID > ");
@@ -512,17 +512,16 @@ public class C206_CaseStudy {
 				    }
 
 				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
-				    ParentList.add(new Parent(pass, sParentContactNum,  "", ""));
+				    ParentList.add(new Parent(pass, sParentContactNum, sID,  "", ""));
 
-					checkvalidlogin = true;
+				    successfulRegister = true;
 					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
-					break;
-				}else {
-					checkvalidlogin = false;
-					System.out.println("Please enter the correct information!");
 					break;
 				}
 		    }
+		}
+		if(successfulRegister == false) {
+			System.out.println("Please enter the correct information!");
 		}
 	  }	
 	}
