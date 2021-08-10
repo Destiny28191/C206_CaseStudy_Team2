@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 public class C206_CaseStudy {
-	private static final int OPTION_QUIT = 5;
+	private static final int OPTION_QUIT = 8;
 	static boolean login = true;
 	static boolean checkvalidlogin = false;
 	private static final int OPTION_UPDATE = 8;
@@ -82,10 +82,9 @@ public class C206_CaseStudy {
                 case 2:      
                 	String ccaRID = Helper.readString("Enter CCA Registration ID > ");
                	    userID = Helper.readString("Enter student ID > ");
-               	    String phoneNum = Helper.readString("Enter your phone number > ");
             		for (int i = 0; i < ParentList.size(); i++) {
             			if (ParentList.get(i) != null) {
-            				if(ParentList.get(i).getSpecialID().equals(ccaRID) && DatabaseList.get(i).getStudentID().equals(userID) && RegisterList.get(i).getsParentContactNum().equals(phoneNum)) {
+            				if(ParentList.get(i).getSpecialID().equals(ccaRID) && DatabaseList.get(i).getStudentID().equals(userID)) {
             					user = "user";
             					login = false;
             					checkvalidlogin = true;
@@ -124,38 +123,7 @@ public class C206_CaseStudy {
                 
                 //Register
                 case 4:
-                	Random r = new Random();
-                	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
-                    String pass = "";
-                	String sID = Helper.readString("Enter your child's student ID > ");
-                	String sName = Helper.readString("Enter your child's full name > ");
-                	String sClass = Helper.readString("Enter your child's class > ");
-                	String sTeacher = Helper.readString("Enter your child's teacher > ");
-                	String sParent = Helper.readString("Enter your name > ");
-                	String sParentEmail = Helper.readString("Enter your email address > ");
-                	String sParentContactNum = Helper.readString("Enter your phone number > ");
-
-
-            		for (int i = 0; i < DatabaseList.size(); i++) {
-            			if (DatabaseList.get(i) != null) {
-            				if(DatabaseList.get(i).getStudentID().equals(sID) && DatabaseList.get(i).getStudentName().equals(sName)) {
-            				    for (int k = 0; k < 7; k++) {
-            				        pass += alphabet.charAt(r.nextInt(alphabet.length()));
-            				    }
-
-            				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
-            				    ParentList.add(new Parent(pass, sParentContactNum,  "", ""));
-
-            					checkvalidlogin = true;
-            					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
-            					break;
-            				}else {
-            					checkvalidlogin = false;
-            					System.out.println("Please enter the correct information!");
-            					break;
-            				}
-            		    }
-            		}
+                	C206_CaseStudy.RegisterParents(DatabaseList, ParentList, RegisterList);
                 break;
                 
               //Exit
@@ -213,12 +181,8 @@ public class C206_CaseStudy {
 			       System.out.println("Student added into CCA"); 
 			       // StudentInCCAList.add(user); 
 			       CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
-			       break; 
-			      } else { 
+			      } else if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() == 0) { 
 			       System.out.println("Failed to add Student into CCA as it is full"); 
-			       C206_CaseStudy.StaffMenu(); 
-			       option = Helper.readInt("Enter option > "); 
-			       break; 
 			      } 
 			     } 
 			    }
@@ -259,7 +223,7 @@ public class C206_CaseStudy {
 				//Once an ID is entered, use the delete function to delete chosenCCA from parent arraylist
 				if(user == "staff") {
 					 C206_CaseStudy.ViewCCA(CCAList); 
-				     int ID = Helper.readInt("Enter a CCA ID to enter CCA> "); 
+				     int ID = Helper.readInt("Enter a CCA ID to (This is update, this whole code does not work)> "); 
 				     for (int i = 0; i < CCAList.size(); i++) { 
 				      if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
 				       System.out.println("Student added into CCA"); 
@@ -275,8 +239,9 @@ public class C206_CaseStudy {
 				     } 
 				    
 				}else if(user == "user"){ 
-				 //
-				}
+					  option = OPTION_QUIT;
+					  System.out.println("Bye!");
+					}
 			} else if (option == 7) {
 				// Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList
@@ -409,29 +374,37 @@ public class C206_CaseStudy {
 				
 	//=========================== Option 5 Delete CCA Category (STAFF)==========================
 		public static void DeleteCCACategory(ArrayList<cca_category> catList) {
-			C206_CaseStudy.ViewCCACategories(catList);
-			int deletecat = Helper.readInt("Enter category to delete > "); 
-	         cca_category A=catList.get(deletecat);
-	        
-	            if ( A != null) { 
-	             System.out.println(A); 
-	             char toDelete = Helper.readChar("Do you wish to delete this CCA category?(y/n) > "); 
-	         
-	             if (toDelete == 'y') { 
-	              boolean deleted = catList.remove(A); 
-	         
-	              if (deleted == true) { 
-	               System.out.println(String.format("CCA category %s was deleted successfully.", 
-	                 deletecat)); 
-	              } else { 
-	               System.out.println("Something went wrong, CCA category was not deleted."); 
-	              } 
-	             } 
-	         
-	            } else { 
-	             System.out.println("That CCA category does not exist!"); 
-	            }		
-			}
+            boolean A = false;
+            int B = 0;
+            C206_CaseStudy.ViewCCACategories(catList);
+            String deletecat = Helper.readString("Enter category to delete: ");
+            for (int i = 0; i < catList.size(); i++) {
+                  if (catList.get(i).getcategory().equals(deletecat)){
+                     A = true;
+                     B = i;
+                  }
+            }
+           
+                if ( A == true) {
+                 System.out.println(deletecat);
+                 char toDelete = Helper.readChar("Do you wish to delete this CCA category?(y/n) > ");
+            
+                 if (toDelete == 'y') {
+                 catList.remove(B);
+            
+                
+                   System.out.println(String.format("CCA category %s was deleted successfully.",
+                     deletecat));
+                  } else {
+                   System.out.println("Something went wrong, CCA category was not deleted.");
+                  }
+                 }
+            
+                 else {
+                 System.out.println("That CCA category does not exist!");
+                }    
+                
+            }
 		
 	//================================= Option 6 Update CCA  ================================
 		public static void updateCCADetails(ArrayList<CCA> CCAList) { 
@@ -515,4 +488,43 @@ public class C206_CaseStudy {
 			CCAList.get(i).setID(i);
 		}
 	  }	
+	
+	
+	//================================= Option 8 Register parents =================================
+	public static void RegisterParents(ArrayList<Database> DatabaseList, ArrayList<Parent> ParentList, ArrayList<Register> RegisterList) {
+    	Random r = new Random();
+    	String alphabet = "0123456789abcdefghijklmnopqrstuvwxyz";
+        String pass = "";
+    	String sID = Helper.readString("Enter your child's student ID > ");
+    	String sName = Helper.readString("Enter your child's full name > ");
+    	String sClass = Helper.readString("Enter your child's class > ");
+    	String sTeacher = Helper.readString("Enter your child's teacher > ");
+    	String sParent = Helper.readString("Enter your name > ");
+    	String sParentEmail = Helper.readString("Enter your email address > ");
+    	String sParentContactNum = Helper.readString("Enter your phone number > ");
+
+
+		for (int i = 0; i < DatabaseList.size(); i++) {
+			if (DatabaseList.get(i) != null) {
+				if(DatabaseList.get(i).getStudentID().equals(sID) && DatabaseList.get(i).getStudentName().equals(sName)) {
+				    for (int k = 0; k < 7; k++) {
+				        pass += alphabet.charAt(r.nextInt(alphabet.length()));
+				    }
+
+				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
+				    ParentList.add(new Parent(pass, sParentContactNum,  "", ""));
+
+					checkvalidlogin = true;
+					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
+					break;
+				}else {
+					checkvalidlogin = false;
+					System.out.println("Please enter the correct information!");
+					break;
+				}
+		    }
+		}
+	  }	
 	}
+
+

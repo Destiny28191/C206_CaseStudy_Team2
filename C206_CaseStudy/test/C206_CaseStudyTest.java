@@ -19,6 +19,14 @@ public class C206_CaseStudyTest {
      CCA cca3 = new CCA(2, "Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"); 
      CCA cca4 = new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"); 
      ArrayList<CCA> CCAList = new ArrayList<CCA>();   
+     
+     Parent parent1 = new Parent("abcdef", "98765432",  "", "");
+     ArrayList<Parent> ParentList = new ArrayList<Parent>();
+     
+     
+     Register registered1 = (new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com","98765432"));
+     ArrayList<Register> RegisterList = new ArrayList<Register>();
+     
 
 	@Before
 	public void setUp() throws Exception {
@@ -93,6 +101,94 @@ public class C206_CaseStudyTest {
 	    assertSame("Check that ViewAllCategorylist", catList.get(0),C1);
 	    assertSame("Check that ViewAllCategorylist",  catList.get(1),C2);
 	}
+	
+	@Test
+    public void testRetrieveAllParent() {
+        // Test if Item list is not null but empty, so that can add a new item
+        assertNotNull("Test if there is valid Parent arraylist to add to", ParentList);
+
+ 
+
+        // test if the list of Academic Clusters retrieved is empty
+        assertEquals("Test if that Parent arraylist size is 0?", 0, ParentList.size());
+
+ 
+
+        // Given an empty list, after adding 2 items, test if the size of the list is 2
+        Parent.add(ParentList, parent1);
+        assertEquals("Test if that Parent arraylist size is 1?", 1, ParentList.size());
+
+ 
+
+        // test if the expected output string same as the list of Academic Cluster
+        // retrieved
+
+ 
+
+        assertSame("Check that ViewAllParentlist", ParentList.get(0), parent1);
+
+    }
+	
+
+    @Test
+    public void testRemoveParent() {
+        // Test if Item List is not null
+        assertNotNull("Test if there is valid Parent arraylist to add to", ParentList);
+        // Add items into the array list
+        Parent.add(ParentList, parent1);
+        assertEquals("Test if that Parent arraylist size is 1?", 1, ParentList.size());
+
+ 
+
+        // Test remove the item
+        ParentList.remove(parent1);
+        // Test that array list is empty
+        assertEquals("Test if that Parent arraylist size is 0?", 0, ParentList.size());
+    }
+
+ 
+
+    @Test
+    public void testAddParent() {
+        // fail("Not yet implemented");
+        // write your code here
+        assertNotNull("Test if there is valid Parent list arraylist to add to", ParentList);
+
+ 
+
+        // Given an empty list, after adding 1 item, the size of the list is 1
+        Parent.add(ParentList, parent1);
+        assertEquals("Test if that Parent arraylist size is 1?", 1, ParentList.size());
+
+ 
+
+        // The item just added is as same as the item of the list
+        assertSame("Test that Parent is added same as 1st item of the list?", parent1, ParentList.get(0));
+
+ 
+
+    }
+    
+    @Test
+    public void testRegisterParent() {
+        // fail("Not yet implemented");
+        // write your code here
+        assertNotNull("Test if there is valid Parent list arraylist to add to", ParentList);
+
+ 
+
+        // Given an empty list, after adding 1 item, the size of the list is 1
+        Parent.add(ParentList, parent1);
+        assertEquals("Test if that Parent arraylist size is 1?", 1, ParentList.size());
+
+ 
+
+        // The item just added is as same as the item of the list
+        assertSame("Test that Parent is added same as 1st item of the list?", parent1, ParentList.get(0));
+
+ 
+
+    }
 	 
 //======================================================================================
 	
