@@ -6,7 +6,7 @@ public class C206_CaseStudy {
 	static boolean checkvalidlogin = false;
 	private static final int OPTION_UPDATE = 8;
 	public static void main(String[] args) {
-		
+		//testing something 
 		ArrayList<Database> DatabaseList = new ArrayList<Database>();
 		ArrayList<Parent> ParentList = new ArrayList<Parent>();
 		ArrayList<Staff> StaffList = new ArrayList<Staff>();
