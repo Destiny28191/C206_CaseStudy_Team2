@@ -193,7 +193,8 @@ public class C206_CaseStudy {
 				//User - View all CCA categories
                 if (user == "staff") {
                 	C206_CaseStudy.DeleteStudentData(DatabaseList);
-			    } else if (user == "user") { 
+			    } 
+                else if (user == "user") { 
 			    	C206_CaseStudy.ViewCCACategories(catList); 
 			    }
 
@@ -284,22 +285,7 @@ public class C206_CaseStudy {
 				//User - Exit
 
 				if(user == "staff") {
-					 C206_CaseStudy.ViewCCA(CCAList); 
-				     int ID = Helper.readInt("Enter a CCA ID to (This is update, this whole code does not work)> "); 
-				     for (int i = 0; i < CCAList.size(); i++) { 
-				      if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
-				       System.out.println("Student added into CCA"); 
-				       // StudentInCCAList.add(user); 
-				       CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
-				       break; 
-				      } else { 
-				       System.out.println("Failed to add Student into CCA as it is full"); 
-				       C206_CaseStudy.StaffMenu(); 
-				       option = Helper.readInt("Enter option > "); 
-				       break; 
-				      } 
-				     } 
-
+					C206_CaseStudy.UpdateCCADetails(CCAList);
 				}
 				else if(user == "user"){ 
 					  option = OPTION_QUIT;
@@ -317,7 +303,13 @@ public class C206_CaseStudy {
 				  option = OPTION_QUIT;
 				  System.out.println("Bye!");
 				}
-
+				
+//			} else if (option == 11) {
+//				System.out.println("Logged Out!");
+//		        C206_CaseStudy.LoginMenu();
+//		        int Logintype = Helper.readInt("Enter an option > ");
+//		        break;
+			
 
 			} else if (option == OPTION_QUIT) {
 				//This needs to be replaced with a log out function
@@ -537,70 +529,71 @@ public class C206_CaseStudy {
             }
 		
 	//================================= Update CCA (STAFF) ================================
-		public static void updateCCADetails(ArrayList<CCA> CCAList) { 
-			boolean isValid = false; 
-			  int updateOption = 0; 
-			  while (isValid == false) { 
-			 
-			   isValid = true; 
-			   C206_CaseStudy.ViewCCA(CCAList); 
-			   int ID = Helper.readInt("Enter a CCA ID > "); 
-			   for (int i = 0; i < CCAList.size(); i++) { 
-			    if (CCAList.get(i).getID() == ID) { 
-			     C206_CaseStudy.UpdateCCADetailMenu(); 
-			     while (updateOption != OPTION_UPDATE) { 
-			      if ((isValid == true) && updateOption == 1) { 
-			       String title = Helper.readString("Enter new title > "); 
-			       CCAList.get(i).setTitle(title); 
-			       System.out.println("Title Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 2) { 
-			       String description = Helper.readString("Enter new description > "); 
-			       CCAList.get(i).setDescription(description); 
-			       System.out.println("Description Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 3) { 
-			       int classSize = Helper.readInt("Enter new class size > "); 
-			       CCAList.get(i).setClassSize(classSize); 
-			       System.out.println("Class Size Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 4) { 
-			       String day = Helper.readString("Enter new day > "); 
-			       CCAList.get(i).setDay(day); 
-			       System.out.println("Day Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 5) { 
-			       String time = Helper.readString("Enter new time > "); 
-			       CCAList.get(i).setTime(time); 
-			       System.out.println("Time Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 6) { 
-			       String venue = Helper.readString("Enter new venue > "); 
-			       CCAList.get(i).setVenue(venue); 
-			       System.out.println("Venue Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 7) { 
-			       String instructor = Helper.readString("Enter new instructor > "); 
-			       CCAList.get(i).setInstructor(instructor); 
-			       System.out.println("Instructor Updated"); 
-			       break; 
-			      } else if ((isValid == true) && updateOption == 8) { 
-			       isValid = false; 
-			       C206_CaseStudy.StaffMenu(); 
-			       Helper.readInt("Enter option > "); 
-			       break; 
-			      } else { 
-			       System.out.println("Update Failed "); 
-			       isValid = false; 
-			       C206_CaseStudy.StaffMenu(); 
-			       Helper.readInt("Enter option > "); 
-			       break; 
-			      } 
-			     } 
-			    } 
-			   } 
-			  } 
-			 }
+		public static void UpdateCCADetails(ArrayList<CCA> CCAList) {
+	        boolean isValid = false;
+	        int updateOption = 0;
+	        while (isValid == false) {
+
+	            isValid = true;
+	            C206_CaseStudy.ViewCCA(CCAList);
+	            int ID = Helper.readInt("Enter a CCA ID > ");
+	            for (int i = 0; i < CCAList.size(); i++) {
+	                if (CCAList.get(i).getID() == ID) {
+	                    C206_CaseStudy.UpdateCCADetailMenu();
+	                    updateOption = Helper.readInt("Enter a update CCA option > ");
+	                    while (updateOption != OPTION_UPDATE) {
+	                        if ((isValid == true) && updateOption == 1) {
+	                            String title = Helper.readString("Enter new title > ");
+	                            CCAList.get(i).setTitle(title);
+	                            System.out.println("Title Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 2) {
+	                            String description = Helper.readString("Enter new description > ");
+	                            CCAList.get(i).setDescription(description);
+	                            System.out.println("Description Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 3) {
+	                            int classSize = Helper.readInt("Enter new class size > ");
+	                            CCAList.get(i).setClassSize(classSize);
+	                            System.out.println("Class Size Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 4) {
+	                            String day = Helper.readString("Enter new day > ");
+	                            CCAList.get(i).setDay(day);
+	                            System.out.println("Day Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 5) {
+	                            String time = Helper.readString("Enter new time > ");
+	                            CCAList.get(i).setTime(time);
+	                            System.out.println("Time Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 6) {
+	                            String venue = Helper.readString("Enter new venue > ");
+	                            CCAList.get(i).setVenue(venue);
+	                            System.out.println("Venue Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 7) {
+	                            String instructor = Helper.readString("Enter new instructor > ");
+	                            CCAList.get(i).setInstructor(instructor);
+	                            System.out.println("Instructor Updated");
+	                            break;
+	                        } else if ((isValid == true) && updateOption == 8) {
+	                            isValid = false;
+	                            C206_CaseStudy.StaffMenu();
+	                            Helper.readInt("Enter option > ");
+	                            break;
+	                        } else {
+	                            System.out.println("Update Failed ");
+	                            isValid = false;
+	                            C206_CaseStudy.StaffMenu();
+	                            Helper.readInt("Enter option > ");
+	                            break;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
 	
 	//================================= Delete CCA (STAFF) =================================
 	public static void DeleteCCA(ArrayList<CCA> CCAList) {
