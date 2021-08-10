@@ -557,7 +557,7 @@ public class C206_CaseStudy {
 	  }	
 	
 	
-	//================================= Register parents (PARENT) =================================
+	//================================= Register parents (PARENT) ================================
 	public static void RegisterParents(ArrayList<Database> DatabaseList, ArrayList<Parent> ParentList, ArrayList<Register> RegisterList) {
 		boolean successfulRegister = false;
     	Random r = new Random();
