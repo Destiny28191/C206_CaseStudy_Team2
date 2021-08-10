@@ -16,7 +16,7 @@ public class C206_CaseStudy {
         DatabaseList.add(new Database ("123", "John Doe"));
 		RegisterList.add(new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
 				"98765432"));
-		ParentList.add(new Parent("abcdef", "98765432",  "", ""));
+		ParentList.add(new Parent("abcdef", "98765432", "123", "", ""));
 		StaffList.add(new Staff("staffID123", "pass123"));
 		CCAList.add(new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
 		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
@@ -512,7 +512,7 @@ public class C206_CaseStudy {
 				    }
 
 				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
-				    ParentList.add(new Parent(pass, sParentContactNum,  "", ""));
+				    ParentList.add(new Parent(pass, sParentContactNum, sID, "", ""));
 
 					checkvalidlogin = true;
 					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
