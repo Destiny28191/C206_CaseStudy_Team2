@@ -18,15 +18,11 @@ public class Parent {
 		this.choosenCCAName = choosenCCAName;
 	}
 	
-	
-
 
 
 	public String getSpecialID() {
 		return specialID;
 	}
-
-
 
 
 
@@ -36,13 +32,9 @@ public class Parent {
 
 
 
-
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
-
 
 
 
@@ -52,13 +44,9 @@ public class Parent {
 
 
 
-
-
 	public String getStudentID() {
 		return studentID;
 	}
-
-
 
 
 
@@ -68,13 +56,9 @@ public class Parent {
 
 
 
-
-
 	public String getChoosenCCAID() {
 		return choosenCCAID;
 	}
-
-
 
 
 
@@ -84,13 +68,9 @@ public class Parent {
 
 
 
-
-
 	public String getChoosenCCAName() {
 		return choosenCCAName;
 	}
-
-
 
 
 
@@ -100,16 +80,10 @@ public class Parent {
 
 
 
-
-
 	public static boolean add(ArrayList<Parent> parentList, Parent parent1) {
 		parentList.add(parent1);
 	    return true;
 		
 	}
-
-
-	
-	
 
 }
