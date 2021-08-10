@@ -38,7 +38,7 @@ public class C206_CaseStudy {
 	      catList.add(C1); 
 	      catList.add(C2); 
 	      catList.add(C3); 
-	      catList.add(C4); 
+	      catList.add(C4);
 		
 		//NOTE
 		//Needs a login function because
@@ -503,7 +503,7 @@ public class C206_CaseStudy {
     	String sParentEmail = Helper.readString("Enter your email address > ");
     	String sParentContactNum = Helper.readString("Enter your phone number > ");
 
-
+    	//...
 		for (int i = 0; i < DatabaseList.size(); i++) {
 			if (DatabaseList.get(i) != null) {
 				if(DatabaseList.get(i).getStudentID().equals(sID) && DatabaseList.get(i).getStudentName().equals(sName)) {
