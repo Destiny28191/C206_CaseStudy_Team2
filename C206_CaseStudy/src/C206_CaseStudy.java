@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 public class C206_CaseStudy {
-	private static final int OPTION_QUIT = 8;
+	private static final int OPTION_QUIT = 11;
 	static boolean login = true;
 	static boolean checkvalidlogin = false;
 	private static final int OPTION_UPDATE = 8;
@@ -142,17 +142,66 @@ public class C206_CaseStudy {
 				C206_CaseStudy.UserMenu();
 		    }
 			else if(user == "staff"){
-			C206_CaseStudy.StaffMenu();
+				C206_CaseStudy.StaffMenu();
 			}
 			
 			option = Helper.readInt("Enter an option > ");
 			if (option == 1) {
-				// View all CCA
-				C206_CaseStudy.ViewCCA(CCAList);
+				//User - View all CCAs
+				//Staff - View database
+				if (user == "staff") {
+					
+			    } else if (user == "user") { 
+			     C206_CaseStudy.ViewCCA(CCAList); 
+			    }
+				
 				
 			} else if (option == 2) {
-				//Staff - Add a new CCA
+				//Staff - Add a student into database
 				//User - combine view all items and add a function to select a CCA and add it to parentList
+				C206_CaseStudy.ViewCCACategories(catList);
+                if (user == "staff") {
+					
+			    } else if (user == "user") { 
+			     C206_CaseStudy.ViewCCA(CCAList); 
+			     int ID = Helper.readInt("Enter a CCA ID to enter CCA> "); 
+			     for (int i = 0; i < CCAList.size(); i++) { 
+			      if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
+			       System.out.println("Student added into CCA"); 
+			       // StudentInCCAList.add(user); 
+			       CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
+			      } else if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() == 0) { 
+			       System.out.println("Failed to add Student into CCA as it is full"); 
+			      } 
+			     } 
+			    }
+			    
+				
+			} else if (option == 3) {
+				//Staff - Delete a student into database
+				//User - View all CCA categories
+                if (user == "staff") {
+					
+			    } else if (user == "user") { 
+			    	C206_CaseStudy.ViewCCACategories(catList); 
+			    }
+				
+                
+			} else if (option == 4) {
+				//Staff - View all CCAs
+				//User - Show list of all selected CCAs then prompts the user to choose the ID of the CCA they want to remove
+				//Once an ID is entered, use the delete function to delete chosenCCA from parent arraylist
+                if (user == "staff") {
+                	C206_CaseStudy.ViewCCA(CCAList);
+			    } 
+                else if (user == "user") { 
+			    	 
+			    }
+				
+                
+			} else if (option == 5) {
+				//Staff - Add a new CCA
+				//User - Exit
 				if (user == "staff") {
 					int cID = Helper.readInt("Enter CCA ID > ");
 					String cTitle = Helper.readString("Enter CCA name > ");
@@ -173,54 +222,56 @@ public class C206_CaseStudy {
 						System.out.println("CCA NOT added, you must include all details!");
 					}
 					 
-			    } else if (user == "user") { 
-			     C206_CaseStudy.ViewCCA(CCAList); 
-			     int ID = Helper.readInt("Enter a CCA ID to enter CCA> "); 
-			     for (int i = 0; i < CCAList.size(); i++) { 
-			      if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
-			       System.out.println("Student added into CCA"); 
-			       // StudentInCCAList.add(user); 
-			       CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
-			      } else if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() == 0) { 
-			       System.out.println("Failed to add Student into CCA as it is full"); 
-			      } 
-			     } 
+			    } else if (user == "user") {
+			    	option = OPTION_QUIT;
+					System.out.println("Bye!");
+			    }
+			     
+				
+			} else if (option == 6) {
+				//Staff - View all CCA Categories
+				//User - Exit
+				if (user == "staff") {
+					C206_CaseStudy.ViewCCACategories(catList);
+			    } 
+                else if (user == "user") { 
+                	option = OPTION_QUIT;
+					System.out.println("Bye!");
 			    }
 				
-			} else if (option == 3) {
-				// View all CCA Categories
-				C206_CaseStudy.ViewCCACategories(catList);
 				
-			} else if (option == 4) {
+			} else if (option == 7) {
 				//Staff - Add a CCA Category
 				//User - Remove existing CCA
 				if(user == "staff") {
 					C206_CaseStudy.AddCCACategory(catList);
-				}else if(user == "user"){ 
-				 //
+				}
+				else if(user == "user"){ 
+					option = OPTION_QUIT;
+					System.out.println("Bye!");
 				}
 			
 			          
-			} else if (option == 5) {
+			} else if (option == 8) {
 				//Staff - Delete a Category
 				//User - Exit
 				if(user == "staff") {
 					C206_CaseStudy.DeleteCCACategory(catList);
-				}else if(user == "user"){ 
+				}
+				else if(user == "user"){ 
 				  option = OPTION_QUIT;
 				  System.out.println("Bye!");
 				}
 				 
-			} else if (option == 6) {
-				// Update CCA
-				//After clicking 6, the system displays different things depending on who's logged in
 				
+			} else if (option == 9) {
+				//Staff - Update CCA
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to update
 				//then it prompts the user to choose which detail they want to update, there's title, description, classSize, day, time, venue, instructor
 				//Use get method when they select a CCA and then set method to update it
 				
-				//User - Show list of all selected CCAs then prompts the user to choose the ID of the CCA they want to remove
-				//Once an ID is entered, use the delete function to delete chosenCCA from parent arraylist
+				//User - Exit
+				
 				if(user == "staff") {
 					 C206_CaseStudy.ViewCCA(CCAList); 
 				     int ID = Helper.readInt("Enter a CCA ID to (This is update, this whole code does not work)> "); 
@@ -238,19 +289,25 @@ public class C206_CaseStudy {
 				      } 
 				     } 
 				    
-				}else if(user == "user"){ 
+				}
+				else if(user == "user"){ 
 					  option = OPTION_QUIT;
 					  System.out.println("Bye!");
 					}
-			} else if (option == 7) {
+				
+				
+			} else if (option == 10) {
 				// Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList
 				if(user == "staff") {
 					C206_CaseStudy.DeleteCCA(CCAList);
-				}else if(user == "user"){ 
+				}
+				else if(user == "user"){ 
 				  option = OPTION_QUIT;
 				  System.out.println("Bye!");
 				}
+				
+				
 			} else if (option == OPTION_QUIT) {
 				//This needs to be replaced with a log out function
 				System.out.println("Bye!");
@@ -275,21 +332,24 @@ public class C206_CaseStudy {
 	//This menu is only for CCA staff members to view
 	public static void StaffMenu() {
 		C206_CaseStudy.setHeader("CCA - Staff");
-		System.out.println("1. Display CCA");
-		System.out.println("2. Add CCA");
-		System.out.println("3. Display CCA Categories");
-		System.out.println("4. Add CCA Category");
-		System.out.println("5. Delete CCA Category");
-		System.out.println("6. Update CCA");
-		System.out.println("7. Delete CCA");
-		System.out.println("8. Quit");
+		System.out.println("1. View database");
+		System.out.println("2. Add student");
+		System.out.println("3. Delete student");
+		System.out.println("4. Display CCAs");
+		System.out.println("5. Add CCA");
+		System.out.println("6. Display CCA Categories");
+		System.out.println("7. Add CCA Category");
+		System.out.println("8. Delete CCA Category");
+		System.out.println("9. Update CCA");
+		System.out.println("10. Delete CCA");
+		System.out.println("11. Quit");
 		Helper.line(80, "-");
 	}
 	
 	//This menu is only for the user to view
 	public static void UserMenu() {
 		C206_CaseStudy.setHeader("CCA - user");
-		System.out.println("1. Display CCA");
+		System.out.println("1. Display CCAs");
 		System.out.println("2. Select CCA");
 		System.out.println("3. Display CCA Categories");
 		System.out.println("4. Remove existing CCA");
