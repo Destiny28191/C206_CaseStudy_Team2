@@ -157,9 +157,13 @@ public class C206_CaseStudy {
 				//User - View all CCAs
 				//Staff - View database
 				if (user == "staff") {
-
-			    } else if (user == "user") { 
-			     C206_CaseStudy.ViewCCA(CCAList); 
+					Helper.line(80, "-");
+					System.out.println("Database");
+					Helper.line(80, "-");
+					C206_CaseStudy.ViewDatabase(DatabaseList);
+			    } 
+				else if (user == "user") { 
+			    	C206_CaseStudy.ViewCCA(CCAList); 
 			    }
 
 
@@ -386,6 +390,16 @@ public class C206_CaseStudy {
 	}
 	
 	
+	
+	//================================= View Database =================================
+		public static void ViewDatabase(ArrayList<Database> DatabaseList) {
+			System.out.println(String.format("%-20s %-20s", "Student ID", "Student Name"));
+			for (int i = 0; i < DatabaseList.size(); i++) {
+				if (DatabaseList.get(i) != null) {
+					DatabaseList.get(i).displayDatabase();
+			}
+		  }	
+		}
 	
 	//================================= View all CCA =================================
 	public static void ViewCCA(ArrayList<CCA> CCAList) {

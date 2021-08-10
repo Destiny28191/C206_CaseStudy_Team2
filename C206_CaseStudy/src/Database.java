@@ -25,5 +25,10 @@ public class Database {
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
+	
+	public void displayDatabase() {
+		String output = String.format("%-20s %-20s", studentID, studentName);
+		System.out.println(output);
+	}
 
 }
