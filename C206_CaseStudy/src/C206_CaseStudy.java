@@ -521,25 +521,25 @@ public class C206_CaseStudy {
 			boolean P = false;
 			int Q = 0;
 		    C206_CaseStudy.ViewRegistration(RegisterList);
-		    String deleteParentN = Helper.readString("Enter Parent Name to delete: ");
-		    String deleteParentC = Helper.readString("Enter Parent Name to delete: ");
-		    for (int i = 0; i < RegisterList.size(); i++) {
-		    	if (RegisterList.get(i).getsName().equals(deleteParentN) && RegisterList.get(i).getsParentContactNum().equals(deleteParentC)){
+		    String deleteSID = Helper.readString("Enter Student ID > ");
+		    String deleteParentP = Helper.readString("Enter Phone Number > ");
+		    for (int i = 0; i < ParentList.size(); i++) {
+		    	if (ParentList.get(i).getStudentID().equals(deleteSID) && ParentList.get(i).getPhoneNumber().equals(deleteParentP)){
 		    		P = true;
 		            Q = i;
 		            }
 		    	}
 		    
 		    if ( P == true) {
-		    	System.out.println(deleteParentN);
-		    	System.out.println(deleteParentC);
+		    	System.out.println(deleteSID);
+		    	System.out.println(deleteParentP);
 		    	char toDelete = Helper.readChar("Do you wish to delete this Parent?(y/n) > ");
 		    	
 		    	if (toDelete == 'y') {
 		    		RegisterList.remove(Q);
 		    		ParentList.remove(Q);
-		            System.out.println(String.format("Parent %s was deleted successfully.",
-		                     deleteParentN));
+		            System.out.println(String.format("Parent with student ID %s was deleted successfully.",
+		                     deleteSID));
 		                  } else {
 		                   System.out.println("Something went wrong, Parent was not deleted.");
 		                  }
