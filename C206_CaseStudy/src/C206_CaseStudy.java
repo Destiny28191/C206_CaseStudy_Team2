@@ -16,12 +16,10 @@ public class C206_CaseStudy {
 		ArrayList<Register> RegisterList = new ArrayList<Register>();
 		ArrayList<CCA> CCAList = new ArrayList<CCA>();
 		
-        DatabaseList.add(new Database ("420", "Dominic"));
-        DatabaseList.add(new Database ("69", "Stephen"));
         DatabaseList.add(new Database ("123", "John Doe"));
 		RegisterList.add(new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
 				"98765432"));
-		ParentList.add(new Parent("abcdef", "", ""));
+		ParentList.add(new Parent("abcdef", "98765432",  "", ""));
 		StaffList.add(new Staff("staffID123", "pass123"));
 		CCAList.add(new CCA(0, "Soccer", "It's a sport where you kick balls into nets", 25, "Wednesday", "2:30", "Field", "David Tan"));
 		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
@@ -67,16 +65,18 @@ public class C206_CaseStudy {
                 case 1:
                 	userID = Helper.readString("Enter your ID > ");
                	    String name = Helper.readString("Enter your name > ");
-            		for (int i = 0; i < RegisterList.size(); i++) {
+            		for (int i = 0; i < DatabaseList.size(); i++) {
             			if (DatabaseList.get(i) != null) {
             				if(DatabaseList.get(i).getStudentID().equals(userID) && DatabaseList.get(i).getStudentName().equals(name)) {
             					user = "user";
             					login = false;
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
+            					break;
             				}else {
             					checkvalidlogin = false;
             					System.out.println("Incorrect ID or name :(");
+            					break;
             				}
             		    }
             	    }	
@@ -94,9 +94,11 @@ public class C206_CaseStudy {
             					login = false;
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
+            					break;
             				}else {
             					checkvalidlogin = false;
             					System.out.println("Incorrect CCA Registration ID or student ID :(");
+            					break;
             				}
             		    }
             	    }	
@@ -113,9 +115,11 @@ public class C206_CaseStudy {
             					login = false;
             					checkvalidlogin = true;
             					System.out.println("Login successful!");
+            					break;
             				}else {
             					checkvalidlogin = false;
             					System.out.println("Incorrect username or password :(");
+            					break;
 
             				}
             		    }
@@ -136,21 +140,23 @@ public class C206_CaseStudy {
                 	String sParentContactNum = Helper.readString("Enter your phone number > ");
                 	
                 	
-            		for (int i = 0; i < StaffList.size(); i++) {
-            			if (RegisterList.get(i) != null) {
-            				if(RegisterList.get(i).getsID().equals(sID) && RegisterList.get(i).getsName().equals(sName)) {
+            		for (int i = 0; i < DatabaseList.size(); i++) {
+            			if (DatabaseList.get(i) != null) {
+            				if(DatabaseList.get(i).getStudentID().equals(sID) && DatabaseList.get(i).getStudentName().equals(sName)) {
             				    for (int k = 0; k < 7; k++) {
             				        pass += alphabet.charAt(r.nextInt(alphabet.length()));
             				    }
             				    
             				    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
-            				    ParentList.add(new Parent(pass, "", ""));
+            				    ParentList.add(new Parent(pass, sParentContactNum,  "", ""));
             					
-            					checkvalidlogin = false;
+            					checkvalidlogin = true;
             					System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
+            					break;
             				}else {
             					checkvalidlogin = false;
             					System.out.println("Please enter the correct information!");
+            					break;
             				}
             		    }
             		}
