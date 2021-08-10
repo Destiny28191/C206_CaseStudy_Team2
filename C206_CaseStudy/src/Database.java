@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Database {
 	
@@ -25,6 +26,12 @@ public class Database {
 	public void setStudentName(String studentName) {
 		this.studentName = studentName;
 	}
+	
+	public static boolean add(ArrayList<Database> DatabaseList, Database newData) {
+		DatabaseList.add(newData);
+		return true;
+	}
+	
 	
 	public void displayDatabase() {
 		String output = String.format("%-20s %-20s", studentID, studentName);

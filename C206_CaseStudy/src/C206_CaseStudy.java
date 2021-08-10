@@ -170,10 +170,10 @@ public class C206_CaseStudy {
 			} else if (option == 2) {
 				//Staff - Add a student into database
 				//User - combine view all items and add a function to select a CCA and add it to parentList
-				C206_CaseStudy.ViewCCACategories(catList);
                 if (user == "staff") {
-
-			    } else if (user == "user") { 
+                	C206_CaseStudy.AddStudentData(DatabaseList);
+			    } 
+                else if (user == "user") { 
 			     C206_CaseStudy.ViewCCA(CCAList); 
 			     int ID = Helper.readInt("Enter a CCA ID to enter CCA> "); 
 			     for (int i = 0; i < CCAList.size(); i++) { 
@@ -192,7 +192,7 @@ public class C206_CaseStudy {
 				//Staff - Delete a student into database
 				//User - View all CCA categories
                 if (user == "staff") {
-
+                	C206_CaseStudy.DeleteStudentData(DatabaseList);
 			    } else if (user == "user") { 
 			    	C206_CaseStudy.ViewCCACategories(catList); 
 			    }
@@ -391,7 +391,7 @@ public class C206_CaseStudy {
 	
 	
 	
-	//================================= View Database =================================
+	//============================== View Database (STAFF) ==============================
 		public static void ViewDatabase(ArrayList<Database> DatabaseList) {
 			System.out.println(String.format("%-20s %-20s", "Student ID", "Student Name"));
 			for (int i = 0; i < DatabaseList.size(); i++) {
@@ -401,6 +401,54 @@ public class C206_CaseStudy {
 		  }	
 		}
 	
+	//======================== Add student into Database (STAFF) ========================
+		public static void AddStudentData(ArrayList<Database> DatabaseList) {
+            String dID = Helper.readString("Enter student ID > ");
+            String dName = Helper.readString("Enter student Name > ");
+			
+			Database newData = new Database(dID, dName);
+		    boolean dresult = Database.add(DatabaseList,newData);
+		    
+		    if (dresult == true) {
+		    	System.out.println("Student added into Database!"); 
+		    } else { 
+				System.out.println("Student NOT added into Database, you must include all details!");
+				}
+		}
+		
+	//======================== Delete student from Database (STAFF) ========================
+		public static void DeleteStudentData(ArrayList<Database> DatabaseList) {
+			boolean D = false;
+            int E = 0;
+            C206_CaseStudy.ViewDatabase(DatabaseList);
+            String deleteData = Helper.readString("Enter student ID to delete: ");
+            for (int i = 0; i < DatabaseList.size(); i++) {
+                  if (DatabaseList.get(i).getStudentID().equals(deleteData)){
+                     D = true;
+                     E = i;
+                  }
+            }
+           
+                if ( D == true) {
+                 System.out.println(deleteData);
+                 char toDelete = Helper.readChar("Do you wish to delete this Student?(y/n) > ");
+            
+                 if (toDelete == 'y') {
+                 DatabaseList.remove(E);
+            
+                
+                   System.out.println(String.format("Student %s was deleted successfully.",
+                     deleteData));
+                  } else {
+                   System.out.println("Something went wrong, Student was not deleted.");
+                  }
+                 }
+            
+                 else {
+                 System.out.println("That Student does not exist!");
+                }
+		}
+		
 	//================================= View all CCA =================================
 	public static void ViewCCA(ArrayList<CCA> CCAList) {
 		System.out.println(String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s", "ID", "Title", "Instructor", "Class Size", "Day", "Time", "Venue", "Description"));
@@ -429,6 +477,7 @@ public class C206_CaseStudy {
 		CCAList.add(cca);
 		return true;
 	}
+	
 	//============================ View all CCA Categories ===========================
 		public static void ViewCCACategories(ArrayList<cca_category> catList) {
 			System.out.println("CCA Categories");
@@ -438,7 +487,7 @@ public class C206_CaseStudy {
 		        }
 		          }
 			}
-		
+	
 	//=========================== Add CCA Category (STAFF) ===========================
 		public static void AddCCACategory(ArrayList<cca_category> catList) {
 			String CCAcategory = Helper.readString("Enter CCA Category > ");
