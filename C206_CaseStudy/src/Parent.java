@@ -79,7 +79,6 @@ public class Parent {
 	}
 
 
-
 	public static boolean add(ArrayList<Parent> parentList, Parent parent1) {
 		parentList.add(parent1);
 	    return true;

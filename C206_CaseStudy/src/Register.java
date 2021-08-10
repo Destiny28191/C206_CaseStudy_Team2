@@ -76,5 +76,10 @@ public class Register {
 	public void setsParentContactNum(String sParentContactNum) {
 		this.sParentContactNum = sParentContactNum;
 	}
+	
+	public void displayRegistration() {
+		String output = String.format("%-8s %-20s %-15s %-20s %-20s %-25s %-15s\n", sID, sName, sClass, sTeacher, sParentName, sParentEmail, sParentContactNum );
+		System.out.println(output);
+	}
 
 }

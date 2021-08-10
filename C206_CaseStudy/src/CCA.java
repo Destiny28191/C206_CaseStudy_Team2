@@ -87,6 +87,10 @@ public class CCA {
 		this.instructor = instructor;
 	}
 	
+	public static void add(ArrayList<CCA> CCAList, CCA cca) {
+        CCAList.add(cca);
+    }
+	
 	public void displayCCA() {
 		String output = String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s\n", ID, title, instructor, classSize, day, time, venue, description);
 		System.out.println(output);
