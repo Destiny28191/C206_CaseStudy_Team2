@@ -387,7 +387,7 @@ public class C206_CaseStudy {
 	
 	
 	
-	//================================= Option 1 View all CCA =================================
+	//================================= View all CCA =================================
 	public static void ViewCCA(ArrayList<CCA> CCAList) {
 		System.out.println(String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s", "ID", "Title", "Instructor", "Class Size", "Day", "Time", "Venue", "Description"));
 		for (int i = 0; i < CCAList.size(); i++) {
@@ -397,7 +397,7 @@ public class C206_CaseStudy {
 	  }	
 	}
 	
-	//=============================== Option 2 Add a CCA (STAFF) ===============================
+	//=============================== Add a CCA (STAFF) ===============================
 	public static boolean AddCCA(ArrayList<CCA> CCAList, CCA cca ) {
 		for (int i = 0; i < CCAList.size(); i++) {
 			if (cca.getID() < 0 || cca.getID() == CCAList.get(i).getID()) {
@@ -415,7 +415,7 @@ public class C206_CaseStudy {
 		CCAList.add(cca);
 		return true;
 	}
-	//============================ Option 3 View all CCA Categories ===========================
+	//============================ View all CCA Categories ===========================
 		public static void ViewCCACategories(ArrayList<cca_category> catList) {
 			System.out.println("CCA Categories");
 			for (int i = 0; i < catList.size(); i++) {
@@ -425,7 +425,7 @@ public class C206_CaseStudy {
 		          }
 			}
 		
-	//=========================== Option 4 Add CCA Category (STAFF) ===========================
+	//=========================== Add CCA Category (STAFF) ===========================
 		public static void AddCCACategory(ArrayList<cca_category> catList) {
 			String CCAcategory = Helper.readString("Enter CCA Category > ");
 			
@@ -439,7 +439,7 @@ public class C206_CaseStudy {
 				}
 		    }
 				
-	//=========================== Option 5 Delete CCA Category (STAFF)==========================
+	//=========================== Delete CCA Category (STAFF)==========================
 		public static void DeleteCCACategory(ArrayList<cca_category> catList) {
             boolean A = false;
             int B = 0;
@@ -473,7 +473,7 @@ public class C206_CaseStudy {
                 
             }
 		
-	//================================= Option 6 Update CCA  ================================
+	//================================= Update CCA (STAFF) ================================
 		public static void updateCCADetails(ArrayList<CCA> CCAList) { 
 			boolean isValid = false; 
 			  int updateOption = 0; 
@@ -539,7 +539,7 @@ public class C206_CaseStudy {
 			  } 
 			 }
 	
-	//================================= Option 7 Delete CCA =================================
+	//================================= Delete CCA (STAFF) =================================
 	public static void DeleteCCA(ArrayList<CCA> CCAList) {
 		C206_CaseStudy.ViewCCA(CCAList);
 		int ID = Helper.readInt("Enter a CCA ID > ");
@@ -557,7 +557,7 @@ public class C206_CaseStudy {
 	  }	
 	
 	
-	//================================= Option 8 Register parents =================================
+	//================================= Register parents (PARENT) =================================
 	public static void RegisterParents(ArrayList<Database> DatabaseList, ArrayList<Parent> ParentList, ArrayList<Register> RegisterList) {
 		boolean successfulRegister = false;
     	Random r = new Random();
