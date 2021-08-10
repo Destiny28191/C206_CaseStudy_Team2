@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 public class C206_CaseStudy {
-	private static final int OPTION_QUIT = 14;
+	private static final int OPTION_QUIT = 13;
 	static boolean login = true;
 	static boolean checkvalidlogin = false;
 	private static final int OPTION_UPDATE = 8;
@@ -30,6 +29,10 @@ public class C206_CaseStudy {
 		CCAList.add(new CCA(1, "Basketball", "It's a sport where you throw balls into hoops", 30, "Friday", "2:30", "Basketball court", "Jack Johnson"));
 		CCAList.add(new CCA(2, "Concert Band", "It's a CCA where people play musical instruments", 60, "Tuesday and Friday", "3:30", "Room D-4", "Alvin Tay"));
 		CCAList.add(new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"));
+		
+		studentcca sc1 = new studentcca("basketball","johntan");
+		ArrayList<studentcca> sclist = new ArrayList<studentcca>(); 
+		sclist.add(sc1);
 		
 		int option = 0;
 		
@@ -215,18 +218,6 @@ public class C206_CaseStudy {
                 
                 
 			} else if (option == 5) {
-				//Staff - Add Parent
-				//User - Exit 
-                if (user == "staff") {
-                	
-			    } 
-                else if (user == "user") { 
-                	option = OPTION_QUIT;
-					System.out.println("Bye!");
-			    }
-                
-                
-			} else if (option == 6) {
 				//Staff - Delete Parent
 				//User - Exit 
                 if (user == "staff") {
@@ -238,7 +229,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 7) {
+			} else if (option == 6) {
 				//Staff - View all CCAs
 				//User - Exit
                 if (user == "staff") {
@@ -250,7 +241,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 8) {
+			} else if (option == 7) {
 				//Staff - Add a new CCA
 				//User - Exit
 				if (user == "staff") {
@@ -279,7 +270,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 9) {
+			} else if (option == 8) {
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList
 				//User - Exit
@@ -292,7 +283,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 10) {
+			} else if (option == 9) {
 				//Staff - Update CCA
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to update
 				//then it prompts the user to choose which detail they want to update, there's title, description, classSize, day, time, venue, instructor
@@ -308,7 +299,7 @@ public class C206_CaseStudy {
 				}
 
 
-			} else if (option == 11) {
+			} else if (option == 10) {
 				//Staff - View all CCA Categories
 				//User - Exit
 				if(user == "staff") {
@@ -320,7 +311,7 @@ public class C206_CaseStudy {
 				}
 
 
-			} else if (option == 12) {
+			} else if (option == 11) {
 				//Staff - Add CCA Categories
 				//User - Exit
 				if(user == "staff") {
@@ -332,7 +323,7 @@ public class C206_CaseStudy {
 					}
 
 
-			} else if (option == 13) {
+			} else if (option == 12) {
 				//Staff - Delete a CCA Category
 				//User - Exit
 				if(user == "staff") {
@@ -342,13 +333,7 @@ public class C206_CaseStudy {
 				  option = OPTION_QUIT;
 				  System.out.println("Bye!");
 				}
-				
-//			} else if (option == 14) {
-//				System.out.println("Logged Out!");
-//		        C206_CaseStudy.LoginMenu();
-//		        int Logintype = Helper.readInt("Enter an option > ");
-//		        break;
-			
+
 
 			} else if (option == OPTION_QUIT) {
 				//This needs to be replaced with a log out function
@@ -378,16 +363,15 @@ public class C206_CaseStudy {
 		System.out.println("2. Add student");
 		System.out.println("3. Delete student");
 		System.out.println("4. View Registration List");
-		System.out.println("5. Add parent");
-		System.out.println("6. Delete parent");
-		System.out.println("7. Display CCAs");
-		System.out.println("8. Add CCA");
-		System.out.println("9. Delete CCA");
-		System.out.println("10. Update CCA");
-		System.out.println("11. Display CCA Categories");
-		System.out.println("12. Add CCA Category");
-		System.out.println("13. Delete CCA Category");
-		System.out.println("14. Quit");
+		System.out.println("5. Delete parent");
+		System.out.println("6. Display CCAs");
+		System.out.println("7. Add CCA");
+		System.out.println("8. Delete CCA");
+		System.out.println("9. Update CCA");
+		System.out.println("10. Display CCA Categories");
+		System.out.println("11. Add CCA Category");
+		System.out.println("12. Delete CCA Category");
+		System.out.println("13. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -435,6 +419,7 @@ public class C206_CaseStudy {
 		  }	
 		}
 	
+		
 	//======================== Add student into Database (STAFF) ========================
 		public static void AddStudentData(ArrayList<Database> DatabaseList) {
             String dID = Helper.readString("Enter student ID > ");
@@ -449,6 +434,7 @@ public class C206_CaseStudy {
 				System.out.println("Student NOT added into Database, you must include all details!");
 				}
 		}
+		
 		
 	//======================== Delete student from Database (STAFF) ========================
 		public static void DeleteStudentData(ArrayList<Database> DatabaseList) {
@@ -530,12 +516,6 @@ public class C206_CaseStudy {
 		}
 		
 		
-	//======================== Add Parent (STAFF) ========================
-		public static void AddParent(ArrayList<Parent> ParentList) {
-			
-		}
-		
-		
 	//======================== Delete Parent (STAFF) ========================
 		public static void DeleteParent(ArrayList<Register> RegisterList, ArrayList<Parent> ParentList) {
 			boolean P = false;
@@ -581,6 +561,7 @@ public class C206_CaseStudy {
 	  }	
 	}
 	
+	
 	//=============================== Add a CCA (STAFF) ===============================
 	public static boolean AddCCA(ArrayList<CCA> CCAList, CCA cca ) {
 		for (int i = 0; i < CCAList.size(); i++) {
@@ -617,6 +598,7 @@ public class C206_CaseStudy {
 				CCAList.get(i).setID(i);
 			}
 		  }
+		
 		
 	//================================= Update CCA (STAFF) ================================
 		public static void UpdateCCADetails(ArrayList<CCA> CCAList) {         
@@ -753,4 +735,18 @@ public class C206_CaseStudy {
                 
             }
 		
+	//=========================== Add student to CCA ==========================
+		public static void AddStudentcca(ArrayList<studentcca> sclist) {
+	        String Scca = Helper.readString("Enter cca");
+	        String Sname = Helper.readString("Enter studentname ");
+	    
+	    studentcca newScca = new studentcca(Scca, Sname);
+	      boolean SCresult = studentcca.add(sclist,newScca);
+	      
+	      if (SCresult == true) {
+	        System.out.println("Student added into cca"); 
+	      } else { 
+	      System.out.println("Student NOT added into Database, you must include all details!");
+	      }
+	  }	
 }

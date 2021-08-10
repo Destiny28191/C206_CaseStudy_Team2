@@ -105,7 +105,7 @@ public class C206_CaseStudyTest {
 	    assertSame("Check that ViewAllCategorylist",  catList.get(1),C2);
 	}
 	
-	//junit test for update CCA details
+	//JUnit test for update CCA details
 
 	@Test
 	public void UpdateCCADetails() {
