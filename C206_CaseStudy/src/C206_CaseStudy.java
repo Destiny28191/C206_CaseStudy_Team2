@@ -529,72 +529,80 @@ public class C206_CaseStudy {
             }
 		
 	//================================= Update CCA (STAFF) ================================
-		public static void UpdateCCADetails(ArrayList<CCA> CCAList) {
-	        boolean isValid = false;
-	        int updateOption = 0;
-	        while (isValid == false) {
+		public static void UpdateCCADetails(ArrayList<CCA> CCAList) {         
+			boolean isValid = false;         
+			int updateOption = 0;         
+			while (isValid == false) {
+				isValid = true;             
+				C206_CaseStudy.ViewCCA(CCAList);             
+				int ID = Helper.readInt("Enter a CCA ID > ");             
+				for (int i = 0; i < CCAList.size(); i++) {                 
+					if (CCAList.get(i).getID() == ID) {                     
+						C206_CaseStudy.UpdateCCADetailMenu();                     
+						updateOption = Helper.readInt("Enter a update CCA option > ");                     
+						while (updateOption != OPTION_UPDATE) {                         
+							if ((isValid == true) && updateOption == 1) {                             
+								String title = Helper.readString("Enter new title > ");                             
+								CCAList.get(i).setTitle(title);                             
+								System.out.println("Title Updated");                             
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 2) {                             
+								String description = Helper.readString("Enter new description > ");                             
+								CCAList.get(i).setDescription(description);                             
+								System.out.println("Description Updated");                             
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 3) {                             
+								int classSize = Helper.readInt("Enter new class size > ");                             
+								CCAList.get(i).setClassSize(classSize);                             
+								System.out.println("Class Size Updated");                            
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 4) {                             
+								String day = Helper.readString("Enter new day > ");                            
+								CCAList.get(i).setDay(day);                            
+								System.out.println("Day Updated");                            
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 5) {                             
+								String time = Helper.readString("Enter new time > ");                            
+								CCAList.get(i).setTime(time);                             
+								System.out.println("Time Updated");                             
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 6) {                            
+								String venue = Helper.readString("Enter new venue > ");                      
+								CCAList.get(i).setVenue(venue);                            
+								System.out.println("Venue Updated");                             
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 7) {                    
+								String instructor = Helper.readString("Enter new instructor > ");         
+								CCAList.get(i).setInstructor(instructor);                          
+								System.out.println("Instructor Updated");                             
+								break;                         
+								} 
+							else if ((isValid == true) && updateOption == 8) {                           
+								isValid = false;                        
+								C206_CaseStudy.StaffMenu();                            
+								Helper.readInt("Enter option > ");                          
+								break;                        
+								} 
+							else {                             
+								System.out.println("Update Failed ");                             
+								isValid = false;                            
+								C206_CaseStudy.StaffMenu();                            
+								Helper.readInt("Enter option > ");                          
+								break;                         
+								}                    
+							}              
+						}           
+					}      
+				}    
+			}
 
-	            isValid = true;
-	            C206_CaseStudy.ViewCCA(CCAList);
-	            int ID = Helper.readInt("Enter a CCA ID > ");
-	            for (int i = 0; i < CCAList.size(); i++) {
-	                if (CCAList.get(i).getID() == ID) {
-	                    C206_CaseStudy.UpdateCCADetailMenu();
-	                    updateOption = Helper.readInt("Enter a update CCA option > ");
-	                    while (updateOption != OPTION_UPDATE) {
-	                        if ((isValid == true) && updateOption == 1) {
-	                            String title = Helper.readString("Enter new title > ");
-	                            CCAList.get(i).setTitle(title);
-	                            System.out.println("Title Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 2) {
-	                            String description = Helper.readString("Enter new description > ");
-	                            CCAList.get(i).setDescription(description);
-	                            System.out.println("Description Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 3) {
-	                            int classSize = Helper.readInt("Enter new class size > ");
-	                            CCAList.get(i).setClassSize(classSize);
-	                            System.out.println("Class Size Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 4) {
-	                            String day = Helper.readString("Enter new day > ");
-	                            CCAList.get(i).setDay(day);
-	                            System.out.println("Day Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 5) {
-	                            String time = Helper.readString("Enter new time > ");
-	                            CCAList.get(i).setTime(time);
-	                            System.out.println("Time Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 6) {
-	                            String venue = Helper.readString("Enter new venue > ");
-	                            CCAList.get(i).setVenue(venue);
-	                            System.out.println("Venue Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 7) {
-	                            String instructor = Helper.readString("Enter new instructor > ");
-	                            CCAList.get(i).setInstructor(instructor);
-	                            System.out.println("Instructor Updated");
-	                            break;
-	                        } else if ((isValid == true) && updateOption == 8) {
-	                            isValid = false;
-	                            C206_CaseStudy.StaffMenu();
-	                            Helper.readInt("Enter option > ");
-	                            break;
-	                        } else {
-	                            System.out.println("Update Failed ");
-	                            isValid = false;
-	                            C206_CaseStudy.StaffMenu();
-	                            Helper.readInt("Enter option > ");
-	                            break;
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    }
-	
+ 
 	//================================= Delete CCA (STAFF) =================================
 	public static void DeleteCCA(ArrayList<CCA> CCAList) {
 		C206_CaseStudy.ViewCCA(CCAList);
