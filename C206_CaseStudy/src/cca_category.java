@@ -15,8 +15,7 @@ public class cca_category {
 	    this.category = category;
 	  }
 	  public void displaycat() {
-	    String output = String.format("%-25s\n", "CATEGORY");
-	    output += String.format("%-25s\n", category);
+	    String output = String.format("%-25s\n", category);
 	    System.out.println(output);
 	  }
 	  public static boolean add(ArrayList<cca_category> catList, cca_category cCAcategory) {
