@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
 public class C206_CaseStudy {
-	private static final int OPTION_QUIT = 13;
+	private static final int OPTION_QUIT = 14;
 	static boolean login = true;
 	static boolean checkvalidlogin = false;
 	private static final int OPTION_UPDATE = 8;
+	private static final int OPTION_UPDATEP = 4;
 	public static void main(String[] args) {
 		//testing something 
 		ArrayList<Database> DatabaseList = new ArrayList<Database>();
@@ -21,7 +22,7 @@ public class C206_CaseStudy {
 		RegisterList.add(new Register("123", "John Doe", "6-B", "Desmond Lee", "Jane Doe", "JaneDoe@gmail.com",
 				"98765432"));
 		
-		ParentList.add(new Parent("abcdef", "98765432", "123", "", ""));
+		ParentList.add(new Parent("abcdef", "Jane Doe", "JaneDoe@gmail.com", "98765432", "123", "", ""));
 		
 		StaffList.add(new Staff("staffID123", "pass123"));
 		
@@ -227,9 +228,21 @@ public class C206_CaseStudy {
                 	option = OPTION_QUIT;
 					System.out.println("Bye!");
 			    }
-
-
+                
+            
 			} else if (option == 6) {
+				//Staff - Update Parent
+				//User - Exit
+                if (user == "staff") {
+                	C206_CaseStudy.UpdateParentDetails(ParentList, RegisterList);
+			    } 
+                else if (user == "user") { 
+                	option = OPTION_QUIT;
+					System.out.println("Bye!");
+			    }
+
+
+			} else if (option == 7) {
 				//Staff - View all CCAs
 				//User - Exit
                 if (user == "staff") {
@@ -241,7 +254,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 7) {
+			} else if (option == 8) {
 				//Staff - Add a new CCA
 				//User - Exit
 				if (user == "staff") {
@@ -270,7 +283,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 8) {
+			} else if (option == 9) {
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to delete
 				//After they enter it, use the delete function to delete CCA from CCAList.
 				//User - Exit
@@ -283,7 +296,7 @@ public class C206_CaseStudy {
 			    }
 
 
-			} else if (option == 9) {
+			} else if (option == 10) {
 				//Staff - Update CCA
 				//Staff - Show list of all CCA and prompt the staff to enter the ID of the CCA they want to update
 				//then it prompts the user to choose which detail they want to update, there's title, description, classSize, day, time, venue, instructor
@@ -299,7 +312,7 @@ public class C206_CaseStudy {
 				}
 
 
-			} else if (option == 10) {
+			} else if (option == 11) {
 				//Staff - View all CCA Categories
 				//User - Exit
 				if(user == "staff") {
@@ -311,7 +324,7 @@ public class C206_CaseStudy {
 				}
 
 
-			} else if (option == 11) {
+			} else if (option == 12) {
 				//Staff - Add CCA Categories
 				//User - Exit
 				if(user == "staff") {
@@ -323,7 +336,7 @@ public class C206_CaseStudy {
 					}
 
 
-			} else if (option == 12) {
+			} else if (option == 13) {
 				//Staff - Delete a CCA Category
 				//User - Exit
 				if(user == "staff") {
@@ -364,14 +377,15 @@ public class C206_CaseStudy {
 		System.out.println("3. Delete student");
 		System.out.println("4. View Registration List");
 		System.out.println("5. Delete parent");
-		System.out.println("6. Display CCAs");
-		System.out.println("7. Add CCA");
-		System.out.println("8. Delete CCA");
-		System.out.println("9. Update CCA");
-		System.out.println("10. Display CCA Categories");
-		System.out.println("11. Add CCA Category");
-		System.out.println("12. Delete CCA Category");
-		System.out.println("13. Quit");
+		System.out.println("6. Update parent");
+		System.out.println("7. Display CCAs");
+		System.out.println("8. Add CCA");
+		System.out.println("9. Delete CCA");
+		System.out.println("10. Update CCA");
+		System.out.println("11. Display CCA Categories");
+		System.out.println("12. Add CCA Category");
+		System.out.println("13. Delete CCA Category");
+		System.out.println("14. Quit");
 		Helper.line(80, "-");
 	}
 
@@ -386,7 +400,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 	}
 	
-	// menu
+	// Update CCA menu
 	public static void UpdateCCADetailMenu() { 
 	  C206_CaseStudy.setHeader("CCA - UPDATE DETAILS"); 
 	  System.out.println("1. Title"); 
@@ -400,6 +414,17 @@ public class C206_CaseStudy {
 	  Helper.line(80, "-"); 
 	 
 	 }
+	 
+	// Parent menu
+		public static void UpdateParentMenu() { 
+		  C206_CaseStudy.setHeader("Parent - UPDATE DETAILS"); 
+		  System.out.println("1. Parent Name"); 
+		  System.out.println("2. Parent Email"); 
+		  System.out.println("3. Parent Contact Number");  
+		  System.out.println("4. Back"); 
+		  Helper.line(80, "-"); 
+		 
+		 }
 	
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
@@ -491,7 +516,7 @@ public class C206_CaseStudy {
 					    }
 
 					    RegisterList.add(new Register(sID, sName, sClass, sTeacher, sParent, sParentEmail, sParentContactNum));
-					    ParentList.add(new Parent(pass, sParentContactNum, sID,  "", ""));
+					    ParentList.add(new Parent(pass, sID, sParent, sParentEmail, sParentContactNum, "", ""));
 
 					    successfulRegister = true;
 						System.out.println("Registration successful! Your CCA registration ID is: " + pass);  
@@ -548,9 +573,63 @@ public class C206_CaseStudy {
 		                 else {
 		                 System.out.println("That Parent does not exist!");
 		                }
-				}	
+				}
 		
 		
+	//================================= Update Parent Details (STAFF) ================================
+			public static void UpdateParentDetails(ArrayList<Parent> ParentList, ArrayList<Register> RegisterList) {         
+				boolean isValidP = false;
+				int updateOptionP = 0;         
+				while (isValidP == false) {
+					isValidP = true;             
+					C206_CaseStudy.ViewRegistration(RegisterList);             
+					String ID = Helper.readString("Enter student ID > ");             
+					for (int i = 0; i < RegisterList.size(); i++) {                 
+						if (RegisterList.get(i).getsID().equals(ID)) {                     
+							C206_CaseStudy.UpdateParentMenu();                     
+							updateOptionP = Helper.readInt("Enter a update Parent option > ");                     
+							while (updateOptionP != OPTION_UPDATEP) {                         
+								if ((isValidP == true) && updateOptionP == 1) {                             
+									String pName = Helper.readString("Enter new name > ");                             
+									RegisterList.get(i).setsParentName(pName);
+									ParentList.get(i).setName(pName);
+									System.out.println("Name Updated!");                             
+									break;                         
+									} 
+								else if ((isValidP == true) && updateOptionP == 2) {                             
+									String pEmail = Helper.readString("Enter new email address > ");                             
+									RegisterList.get(i).setsParentEmail(pEmail);
+									ParentList.get(i).setEmail(pEmail);
+									System.out.println("Email address Updated!");                             
+									break;                         
+									} 
+								else if ((isValidP == true) && updateOptionP == 3) {                             
+									String pContact = Helper.readString("Enter new phone number > ");                             
+									RegisterList.get(i).setsParentContactNum(pContact);
+									ParentList.get(i).setPhoneNumber(pContact);
+									System.out.println("Phone number Updated!");                            
+									break;                         
+									} 
+								else if ((isValidP == true) && updateOptionP == 4) {                           
+									isValidP = false;                        
+									C206_CaseStudy.StaffMenu();                            
+									Helper.readInt("Enter option > ");                          
+									break;                        
+									} 
+								else {                             
+									System.out.println("Update Failed ");                             
+									isValidP = false;                            
+									C206_CaseStudy.UpdateParentDetails(ParentList, RegisterList);                            
+									Helper.readInt("Enter a update Parent option > ");                          
+									break;                         
+									}                    
+								}              
+							}           
+						}      
+					}    
+				}		
+		
+			
 	//================================= View all CCA =================================
 	public static void ViewCCA(ArrayList<CCA> CCAList) {
 		System.out.println(String.format("%-5s %-25s %-25s %-15s %-20s %-10s %-25s %-20s", "ID", "Title", "Instructor", "Class Size", "Day", "Time", "Venue", "Description"));
@@ -664,8 +743,8 @@ public class C206_CaseStudy {
 							else {                             
 								System.out.println("Update Failed ");                             
 								isValid = false;                            
-								C206_CaseStudy.StaffMenu();                            
-								Helper.readInt("Enter option > ");                          
+								C206_CaseStudy.UpdateCCADetailMenu();                           
+								Helper.readInt("Enter a update CCA option > ");                          
 								break;                         
 								}                    
 							}              

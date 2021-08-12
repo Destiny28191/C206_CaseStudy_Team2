@@ -20,7 +20,7 @@ public class C206_CaseStudyTest {
      CCA cca4 = new CCA(3, "Going home club", "It's not a CCA, you just go home", 1, "Everyday", "Depends", "School Gate", "Yourself"); 
      ArrayList<CCA> CCAList = new ArrayList<CCA>();   
      
-     Parent parent1 = new Parent("abcdef", "98765432", "123",  "", "");
+     Parent parent1 = new Parent("abcdef", "Jane Doe", "JaneDoe@gmail.com", "98765432", "123", "", "");
      ArrayList<Parent> ParentList = new ArrayList<Parent>();
      
      
