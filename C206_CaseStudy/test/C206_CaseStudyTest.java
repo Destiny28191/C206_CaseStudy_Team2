@@ -104,26 +104,24 @@ public class C206_CaseStudyTest {
 	    assertSame("Check that ViewAllCategorylist", catList.get(0),C1);
 	    assertSame("Check that ViewAllCategorylist",  catList.get(1),C2);
 	}
-	
-	//JUnit test for update CCA details
-
 	@Test
-	public void UpdateCCADetails() {
-	assertNotNull("Test if there is valid CCA list arraylist to add to", CCAList);
+    public void testupdatecategory() {
+      //fail("Not yet implemented");
+      // write your code here
+      assertNotNull("Test if there is valid category list arraylist to ", catList);
 
-	 
+          //Given an empty list, after adding 1 item, the size of the list is 1
+          cca_category.add(catList, C1);
+          assertEquals("Test if that Category arraylist size is 1?", 1, catList.size());
 
-	// Given an empty list, after adding 1 item, the size of the list is 1
-	CCA.add(CCAList, cca1);
-	assertEquals("Test if that CCA arraylist size is 1?", 1, CCAList.size());
+          //The item just added is as same as the first item of the list
+          assertSame("Test that Category is added same as 1st item of the list?", C1, catList.get(0));
 
-	 
-
-	// The item just added is as same as the first item of the list
-	assertSame("Test that CCA is added same as 1st item of the list?", cca1, CCAList.get(0));
-	CCAList.get(0).setTitle("SOCCER");
-	assertSame("Test that CCA Title is changed", "SOCCER", CCAList.get(0).getTitle());
-	}
+        
+        catList.get(0).setcategory("clubs");
+        assertSame("Test that CCA Title is changed", "clubs", catList.get(0).getcategory());
+        }
+	
 
 
 	// ============================== View/Add/Delete CCA ==============================
@@ -207,7 +205,25 @@ public class C206_CaseStudyTest {
 
 	assertSame("Error message", cca4, CCAList.get(3));
 	}
+	//JUnit test for update CCA details
 
+		@Test
+		public void UpdateCCADetails() {
+		assertNotNull("Test if there is valid CCA list arraylist to add to", CCAList);
+
+		 
+
+		// Given an empty list, after adding 1 item, the size of the list is 1
+		CCA.add(CCAList, cca1);
+		assertEquals("Test if that CCA arraylist size is 1?", 1, CCAList.size());
+
+		 
+
+		// The item just added is as same as the first item of the list
+		assertSame("Test that CCA is added same as 1st item of the list?", cca1, CCAList.get(0));
+		CCAList.get(0).setTitle("SOCCER");
+		assertSame("Test that CCA Title is changed", "SOCCER", CCAList.get(0).getTitle());
+		}
 	// ============================== View/Add/Delete Student ==============================
 	@Test
 	public void testRetrieveAllStudent() {
