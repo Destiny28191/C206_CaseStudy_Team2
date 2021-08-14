@@ -322,27 +322,12 @@ public class C206_CaseStudy {
         } else if (user == "user") {
           option = OPTION_QUIT;
           System.out.println("Bye!");
-        }
-        
-        
-      } else if (option == 14) {
-            //Staff - Update a CCA Category
-            //User - Exit
-            if(user == "staff") {
-              C206_CaseStudy.UpdateCCACategory(catList);
-            }
-            else if(user == "user"){ 
-              option = OPTION_QUIT;
-              System.out.println("Bye!");
-            }
-
+	}
       } else if (option == 14) {
         // Staff - Update a CCA Category
         // User - Exit
         if (user == "staff") {
           C206_CaseStudy.UpdateCCACategory(catList);
-//          C206_CaseStudy.StaffMenu();
-//          option = Helper.readInt("Enter an option > ");
         } else if (user == "user") {
           option = OPTION_QUIT;
           // System.out.println("Bye!");
