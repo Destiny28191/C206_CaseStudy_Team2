@@ -184,15 +184,7 @@ public class C206_CaseStudy {
 				} else if (user == "user") {
 					C206_CaseStudy.ViewCCA(CCAList);
 					int ID = Helper.readInt("Enter a CCA ID to enter CCA> ");
-					for (int i = 0; i < CCAList.size(); i++) {
-						if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) {
-							System.out.println("Student added into CCA");
-							// StudentInCCAList.add(user);
-							CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1));
-						} else if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() == 0) {
-							System.out.println("Failed to add Student into CCA as it is full");
-						}
-					}
+					C206_CaseStudy.addStudentToCCA(CCAList, ID);
 				}
 
 			} else if (option == 3) {
@@ -924,6 +916,28 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	
+	//================================- Add student to CCA(USER) =====================
+public static void addStudentToCCA(ArrayList<CCA> CCAList , int ID) {
+	boolean status = false;
+    for (int i = 0; i < CCAList.size(); i++) { 
+     if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() != 0) { 
+      System.out.print("Student added into CCA\n"); 
+      // StudentInCCAList.add(user); 
+      CCAList.get(i).setClassSize((CCAList.get(i).getClassSize() - 1)); 
+      status = true;
+      break;
+     } else if (CCAList.get(i).getID() == ID && CCAList.get(i).getClassSize() == 0) { 
+      System.out.println("Failed to add Student into CCA as it is full\n"); 
+      status = true;
+      break;
+     }
+    }
+     if (status == false){
+	   	  System.out.print("Please enter a valid CCA ID\n"); 
+	     }
+}
+	
 
 	// =========================== Add student to CCA ==========================
 	public static void AddStudentcca(ArrayList<studentcca> sclist) {
