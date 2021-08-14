@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -30,11 +32,23 @@ public class C206_CaseStudyTest {
      Database studentdata1 = (new Database ("123", "John Doe"));
      ArrayList<Database> DatabaseList = new ArrayList<Database>();
      
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
 
 	@Before
 	public void setUp() throws Exception {
 	}
 
+	@Before
+	public void setUpStreams() {
+	    System.setOut(new PrintStream(outContent));
+	}
+	
+	@After
+	public void restoreStreams() {
+	    System.setOut(originalOut);
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 	}
@@ -321,4 +335,68 @@ public class C206_CaseStudyTest {
 	// The item just added is as same as the item of the list
 	assertSame("Test that Parent is added same as 1st item of the list?", parent1, ParentList.get(0));
 	}
-}
+	
+	
+	// ============================== Login Parent ==============================
+	@Test
+	public void testLoginParent() {
+	// write your code here
+	assertNotNull("Test if there is valid Parent list arraylist to add to", ParentList);
+
+	// Add one parent to list so it can be used for login
+	Parent.add(ParentList, parent1);
+	assertEquals("Test if that Parent arraylist size is 1?", 1, ParentList.size());
+
+	// Login function, as long as login is true, it will never log in
+	boolean login = true;
+	String ccaRID = ParentList.get(0).getSpecialID();
+	String userID = ParentList.get(0).getStudentID();
+	for (int i = 0; i < ParentList.size(); i++) {
+		if (ParentList.get(i) != null) {
+			if(ParentList.get(i).getSpecialID().equals(ccaRID) && ParentList.get(i).getStudentID().equals(userID)) {
+				login = false;
+				System.out.print("Login successful!");
+				assertFalse("login switches to false", login);
+				assertEquals("Login successful!", outContent.toString());
+				break;
+			  }
+			}
+	    }
+     }
+	
+	// ============================== Add student to CCA ==============================
+	
+	@Test
+	public void testAddStudentCCAPass() {
+	// write your code here
+		assertNotNull("Test if there is valid CCA arraylist to add to", CCAList);
+	
+	//Add CCA entries
+	CCA.add(CCAList, cca1);
+	CCA.add(CCAList, cca2);
+	CCA.add(CCAList, cca3);
+	CCA.add(CCAList, cca4);
+	
+	//Check if ID exists, print out a message saying student added into CCA
+    int ID = 1; 
+    C206_CaseStudy.addStudentToCCA(CCAList, ID); 
+    assertEquals("Student added into CCA\n", outContent.toString());
+     }
+	
+	@Test
+	public void testAddStudentCCAFail() {
+	// write your code here
+		assertNotNull("Test if there is valid CCA arraylist to add to", CCAList);
+	
+	//Add CCA entries
+	CCA.add(CCAList, cca1);
+	CCA.add(CCAList, cca2);
+	CCA.add(CCAList, cca3);
+	CCA.add(CCAList, cca4);
+	
+	//Check if ID does not exist, print out a message saying to enter a valid CCA ID
+    int ID = 5; 
+    C206_CaseStudy.addStudentToCCA(CCAList, ID); 
+    assertEquals("Please enter a valid CCA ID\n", outContent.toString());
+     }
+	}
